@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "WorkoutTracker",
+    "slug": "WorkoutTracker",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0F0F0F"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "icon": "./assets/icon.png",
+      "edgeToEdgeEnabled": true,
+      "package": "com.geotza.WorkoutTracker"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2dc91e77-5dfa-4e78-a166-4984893b63f2"
+      }
+    }
+  }
+}
