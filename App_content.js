@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput, Image, KeyboardAvoidingView, Platform, Switch, Alert, Modal, BackHandler } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput, Image, KeyboardAvoidingView, Platform, Alert, Modal, BackHandler, AppState } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
@@ -205,7 +205,10 @@ function AddExModal({ visible, muscle, nextExId, onClose, onSave, C }) {
           </ScrollView>
           <View style={[styles.rowBetween,{marginBottom:16}]}>
             <Text style={styles.cardSub}>Bodyweight exercise (adds BW to weight)</Text>
-            <Switch value={isBodyweight} onValueChange={setIsBodyweight} trackColor={{true:C.accent}} thumbColor={C.white}/>
+            <TouchableOpacity onPress={()=>setIsBodyweight(b=>!b)}
+              style={{width:44,height:26,borderRadius:13,backgroundColor:isBodyweight?C.accent:C.border,justifyContent:'center',paddingHorizontal:2}}>
+              <View style={{width:22,height:22,borderRadius:11,backgroundColor:C.white,alignSelf:isBodyweight?'flex-end':'flex-start'}}/>
+            </TouchableOpacity>
           </View>
           <TouchableOpacity style={[styles.primaryBtn,{alignItems:'center'}]} onPress={()=>{if(!name.trim())return;onSave({id:nextExId,name:name.trim(),muscle,equipment,isBodyweight});setName('');setEquipment('Barbell');setIsBodyweight(false);}}>
             <Text style={styles.primaryBtnText}>Save exercise</Text>
@@ -224,13 +227,14 @@ function EditWorkoutModal({ visible, workout, exercises, onClose, onSave, onAddE
   const getEx = (id) => exercises.find(e => e.id === id);
   const upd = (fn) => { const u=JSON.parse(JSON.stringify(local)); fn(u); setLocal(u); };
   return (
-    <TouchableOpacity style={styles.modalBackdrop} activeOpacity={1} onPress={onClose}>
-      <TouchableOpacity style={[styles.modal,{maxHeight:'90%'}]} activeOpacity={1} onPress={()=>{}}>
+    <Modal visible={visible&&!!local} transparent animationType="slide" onRequestClose={onClose}>
+      <KeyboardAvoidingView behavior={Platform.OS==='ios'?'padding':'height'} style={{flex:1,justifyContent:'flex-end',backgroundColor:'rgba(0,0,0,0.6)'}}>
+      <View style={[styles.modal,{maxHeight:'92%'}]}>
         <View style={styles.rowBetween}>
           <Text style={styles.sectionTitle}>Edit Workout</Text>
           <TouchableOpacity onPress={onClose}><Text style={{fontSize:20,color:C.text}}>X</Text></TouchableOpacity>
         </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled={true} keyboardShouldPersistTaps="handled">
           <Text style={[styles.cardSub,{marginTop:12,marginBottom:4}]}>Workout name</Text>
           <TextInput style={styles.searchInput} value={local.name} onChangeText={t=>setLocal({...local,name:t})} placeholder="Workout name" placeholderTextColor={C.textMuted}/>
           <Text style={[styles.cardSub,{marginBottom:4}]}>Date (YYYY-MM-DD)</Text>
@@ -243,7 +247,15 @@ function EditWorkoutModal({ visible, workout, exercises, onClose, onSave, onAddE
             return (
               <View key={eIdx} style={[styles.logExCard,{marginBottom:10,borderLeftColor:MUSCLE_COLORS[info?.muscle]||C.accent}]}>
                 <View style={styles.rowBetween}>
-                  <Text style={styles.cardTitle}>{info?.name||'Unknown'}</Text>
+                  <View style={{flexDirection:'row',alignItems:'center',flex:1}}>
+                    <View style={{width:40,height:40,borderRadius:8,backgroundColor:C.bg,alignItems:'center',justifyContent:'center',marginRight:10,overflow:'hidden'}}>
+                      {info?.image&&EXERCISE_IMAGES[info.image]?<Image source={EXERCISE_IMAGES[info.image]} style={{width:40,height:40}} resizeMode="cover"/>:<Text style={{fontSize:20}}>{info?.isBodyweight?'🏃':'🏋️'}</Text>}
+                    </View>
+                    <View style={{flex:1}}>
+                      <Text style={styles.cardTitle}>{info?.name||'Unknown'}</Text>
+                      <Text style={[styles.cardSub,{fontSize:12}]}>{info?.muscle} · {info?.equipment}</Text>
+                    </View>
+                  </View>
                   <TouchableOpacity onPress={()=>upd(u=>u.exercises.splice(eIdx,1))}><Text style={{color:C.danger}}>X</Text></TouchableOpacity>
                 </View>
                 <View style={[styles.row,{marginBottom:4,marginTop:8}]}>
@@ -302,8 +314,9 @@ function EditWorkoutModal({ visible, workout, exercises, onClose, onSave, onAddE
             <Text style={styles.primaryBtnText}>Save changes</Text>
           </TouchableOpacity>
         </ScrollView>
-      </TouchableOpacity>
-    </TouchableOpacity>
+      </View>
+      </KeyboardAvoidingView>
+    </Modal>
   );
 }
 
@@ -567,6 +580,7 @@ function FavBuilderPageV2({ exercises, editingFav, onBack, onSave, C }) {
   const [fbSearch, setFbSearch] = useState('');
   const [showPicker, setShowPicker] = useState(false);
   const [fbPreview, setFbPreview] = useState(null);
+  const [swappingIdx, setSwappingIdx] = useState(null);
 
   const toggleEx = (id) => setFbSelected(prev=>prev.includes(id)?prev.filter(x=>x!==id):[...prev,id]);
   const removeEx = (id) => setFbSelected(prev=>prev.filter(x=>x!==id));
@@ -725,7 +739,7 @@ function FavBuilderPageV2({ exercises, editingFav, onBack, onSave, C }) {
         <Text style={[styles.pageTitle,{margin:0}]}>{editingFav?'Edit favorite':'New favorite v3'}</Text>
         <TouchableOpacity style={styles.primaryBtn} onPress={save}><Text style={styles.primaryBtnText}>Save</Text></TouchableOpacity>
       </View>
-      <ScrollView contentContainerStyle={{padding:16,paddingBottom:40}} keyboardShouldPersistTaps="handled">
+      <ScrollView contentContainerStyle={{padding:16,paddingBottom:100}} keyboardShouldPersistTaps="handled">
         <Text style={[styles.cardSub,{marginBottom:6,color:nameError?C.danger:C.textSecondary}]}>Name {nameError?'— required':''}</Text>
         <TextInput style={[styles.searchInput,{marginBottom:16,borderColor:nameError?C.danger:C.border}]} value={fbName} onChangeText={t=>{setFbName(t);if(t.trim())setNameError(false);}} placeholder="e.g. Push Day A" placeholderTextColor={C.textMuted}/>
         
@@ -741,11 +755,26 @@ function FavBuilderPageV2({ exercises, editingFav, onBack, onSave, C }) {
             <Text style={styles.emptyText}>No exercises yet.{'\n'}Tap "+ Add exercise" to start.</Text>
           </View>
         ):(
-          fbSelected.map((id,idx)=>{
+          <>
+          {swappingIdx!==null&&(
+            <View style={[styles.card,{backgroundColor:C.accentLight,marginBottom:8}]}>
+              <Text style={[styles.cardSub,{color:C.accent}]}>Select an exercise to swap with "{exercises.find(e=>e.id===fbSelected[swappingIdx])?.name}"</Text>
+              <TouchableOpacity onPress={()=>setSwappingIdx(null)} style={{marginTop:6}}><Text style={{color:C.danger}}>Cancel swap</Text></TouchableOpacity>
+            </View>
+          )}
+          {fbSelected.map((id,idx)=>{
             const e=exercises.find(ex=>ex.id===id);
             if(!e) return null;
             return (
-              <View key={id} style={[styles.card,{flexDirection:'row',alignItems:'center',paddingVertical:10,marginBottom:8}]}>
+              <TouchableOpacity key={id}
+                onPress={swappingIdx!==null&&swappingIdx!==idx?()=>{
+                  setFbSelected(prev=>{const arr=[...prev];const tmp=arr[swappingIdx];arr[swappingIdx]=arr[idx];arr[idx]=tmp;return arr;});
+                  setSwappingIdx(null);
+                }:undefined}
+                activeOpacity={swappingIdx!==null?0.6:1}
+                style={[styles.card,{flexDirection:'row',alignItems:'center',paddingVertical:10,marginBottom:8,
+                  borderColor:swappingIdx===idx?C.accent:swappingIdx!==null?C.success:C.border,
+                  borderWidth:swappingIdx!==null?1.5:0.5}]}>
                 <View style={{width:32,alignItems:'center',gap:4}}>
                   <TouchableOpacity onPress={()=>moveEx(idx,'up')} disabled={idx===0} style={{opacity:idx===0?0.2:1,padding:2}}>
                     <Text style={{fontSize:16,color:C.accent}}>▲</Text>
@@ -761,12 +790,16 @@ function FavBuilderPageV2({ exercises, editingFav, onBack, onSave, C }) {
                   <Text style={[styles.cardTitle,{fontSize:14}]} numberOfLines={1}>{e.name}</Text>
                   <Text style={[styles.cardSub,{fontSize:12}]}>{e.muscle} · {e.equipment}</Text>
                 </View>
+                <TouchableOpacity onPress={()=>setSwappingIdx(swappingIdx===idx?null:idx)} style={{padding:8,marginRight:4}}>
+                  <Text style={{color:swappingIdx===idx?C.accent:C.textMuted,fontSize:18}}>🔁</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={()=>removeEx(id)} style={{padding:8}}>
                   <Text style={{color:C.danger,fontSize:18}}>✕</Text>
                 </TouchableOpacity>
-              </View>
+              </TouchableOpacity>
             );
-          })
+          })}
+          </>
         )}
       </ScrollView>
     </KeyboardAvoidingView>
@@ -841,6 +874,7 @@ export default function App() {
   const [showFavBuilder, setShowFavBuilder] = useState(false);
   const [favMenuId, setFavMenuId] = useState(null);
   const [editingFav, setEditingFav] = useState(null);
+  const [expandedFavId, setExpandedFavId] = useState(null);
   const [collapsedEx, setCollapsedEx] = useState({});
   const [expandedSets, setExpandedSets] = useState({});
   const [exerciseMenuOpen, setExerciseMenuOpen] = useState(null);
@@ -855,6 +889,22 @@ export default function App() {
   const [notesDraft, setNotesDraft] = useState('');
   const [progressMachineId, setProgressMachineId] = useState(null);
   const timerRef = useRef(null);
+  const bgTimestamp = useRef(null);
+
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', state => {
+      if (state === 'background' || state === 'inactive') {
+        bgTimestamp.current = Date.now();
+      } else if (state === 'active') {
+        if (bgTimestamp.current && timerRunning) {
+          const elapsed = Math.floor((Date.now() - bgTimestamp.current) / 1000);
+          setTimerSecs(s => s + elapsed);
+        }
+        bgTimestamp.current = null;
+      }
+    });
+    return () => sub.remove();
+  }, [timerRunning]);
 
   const styles = makeStyles(C);
 
@@ -1251,7 +1301,10 @@ export default function App() {
         </View>
         <View style={[styles.settingRow,{borderBottomWidth:0}]}>
           <Text style={styles.settingLabel}>Dark mode</Text>
-          <Switch value={darkMode} onValueChange={toggleDarkMode} trackColor={{true:C.accent}} thumbColor={C.white}/>
+          <TouchableOpacity onPress={()=>toggleDarkMode(!darkMode)}
+              style={{width:44,height:26,borderRadius:13,backgroundColor:darkMode?C.accent:C.border,justifyContent:'center',paddingHorizontal:2}}>
+              <View style={{width:22,height:22,borderRadius:11,backgroundColor:C.white,alignSelf:darkMode?'flex-end':'flex-start'}}/>
+            </TouchableOpacity>
         </View>
       </View>
 
@@ -1618,24 +1671,49 @@ export default function App() {
         <TouchableOpacity style={styles.primaryBtn} onPress={()=>{setEditingFav(null);setPage('favbuilder');}}><Text style={styles.primaryBtnText}>+ New</Text></TouchableOpacity>
       </View>
       {favorites.length===0?<View style={styles.emptyState}><Text style={styles.emptyIcon}>❤️</Text><Text style={styles.emptyText}>No favorites yet.{'\n'}Build one to start workouts with one tap.</Text></View>:
-        favorites.map(fav=>(
-          <TouchableOpacity key={fav.id} style={styles.card} activeOpacity={0.8} onLongPress={()=>setFavMenuId(favMenuId===fav.id?null:fav.id)} delayLongPress={600}>
-            <View style={styles.rowBetween}>
-              <View style={{flex:1}}>
-                <Text style={styles.cardTitle}>{fav.name}</Text>
-                <Text style={styles.cardSub}>{fav.exerciseIds.length} exercise{fav.exerciseIds.length!==1?'s':''} · Hold to edit/delete</Text>
+        favorites.map(fav=>{
+          const isExpanded = expandedFavId===fav.id;
+          return (
+            <TouchableOpacity key={fav.id} style={styles.card} activeOpacity={0.8}
+              onPress={()=>setExpandedFavId(isExpanded?null:fav.id)}
+              onLongPress={()=>setFavMenuId(favMenuId===fav.id?null:fav.id)} delayLongPress={600}>
+              <View style={styles.rowBetween}>
+                <View style={{flex:1}}>
+                  <Text style={styles.cardTitle}>{fav.name}</Text>
+                  <Text style={styles.cardSub}>{fav.exerciseIds.length} exercise{fav.exerciseIds.length!==1?'s':''} · Hold to edit/delete</Text>
+                </View>
+                <Text style={{color:C.textMuted,fontSize:16}}>{isExpanded?'▲':'▼'}</Text>
               </View>
-            </View>
-            {favMenuId===fav.id&&(
-              <View style={[styles.dropdownMenu,{marginTop:8}]}>
-                <TouchableOpacity style={styles.dropdownItem} onPress={()=>{setFavMenuId(null);setEditingFav(fav);setPage('favbuilder');}}><Text style={styles.dropdownItemText}>✏️  Edit</Text></TouchableOpacity>
-                <View style={styles.dropdownDivider}/>
-                <TouchableOpacity style={styles.dropdownItem} onPress={()=>{deleteFavorite(fav.id);setFavMenuId(null);}}><Text style={[styles.dropdownItemText,{color:C.danger}]}>🗑  Delete</Text></TouchableOpacity>
-              </View>
-            )}
-            <TouchableOpacity style={[styles.primaryBtn,{alignItems:'center',marginTop:10}]} onPress={()=>startFromFavorite(fav)}><Text style={styles.primaryBtnText}>▶ Start workout</Text></TouchableOpacity>
-          </TouchableOpacity>
-        ))
+              {isExpanded&&(
+                <View style={{marginTop:10}}>
+                  {fav.exerciseIds.map((id,i)=>{
+                    const e=exercises.find(ex=>ex.id===id);
+                    if(!e) return null;
+                    return (
+                      <View key={id} style={{flexDirection:'row',alignItems:'center',paddingVertical:8,borderBottomWidth:0.5,borderBottomColor:C.border}}>
+                        <View style={{width:36,height:36,borderRadius:8,backgroundColor:C.bg,alignItems:'center',justifyContent:'center',marginRight:10,overflow:'hidden'}}>
+                          {e.image&&EXERCISE_IMAGES[e.image]?<Image source={EXERCISE_IMAGES[e.image]} style={{width:36,height:36}} resizeMode="cover"/>:<Text style={{fontSize:18}}>{e.isBodyweight?'🏃':'🏋️'}</Text>}
+                        </View>
+                        <View style={{flex:1}}>
+                          <Text style={[styles.cardTitle,{fontSize:14}]} numberOfLines={1}>{e.name}</Text>
+                          <Text style={[styles.cardSub,{fontSize:12}]}>{e.muscle} · {e.equipment}</Text>
+                        </View>
+                      </View>
+                    );
+                  })}
+                </View>
+              )}
+              {favMenuId===fav.id&&(
+                <View style={[styles.dropdownMenu,{marginTop:8}]}>
+                  <TouchableOpacity style={styles.dropdownItem} onPress={()=>{setFavMenuId(null);setEditingFav(fav);setPage('favbuilder');}}><Text style={styles.dropdownItemText}>✏️  Edit</Text></TouchableOpacity>
+                  <View style={styles.dropdownDivider}/>
+                  <TouchableOpacity style={styles.dropdownItem} onPress={()=>{deleteFavorite(fav.id);setFavMenuId(null);}}><Text style={[styles.dropdownItemText,{color:C.danger}]}>🗑  Delete</Text></TouchableOpacity>
+                </View>
+              )}
+              <TouchableOpacity style={[styles.primaryBtn,{alignItems:'center',marginTop:10}]} onPress={()=>startFromFavorite(fav)}><Text style={styles.primaryBtnText}>▶ Start workout</Text></TouchableOpacity>
+            </TouchableOpacity>
+          );
+        })
       }
       <View style={{height:20}}/>
     </ScrollView>

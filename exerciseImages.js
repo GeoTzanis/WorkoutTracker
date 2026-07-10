@@ -441,6 +441,7 @@ const EXERCISE_IMAGES = {
   'Quads/Lever_Alternate_Leg_Extension': require('./assets/exercises/Quads/Lever_Alternate_Leg_Extension.webp'),
   'Quads/Lever_Deadlift': require('./assets/exercises/Quads/Lever_Deadlift.webp'),
   'Quads/Lever_Leg_Extension': require('./assets/exercises/Quads/Lever_Leg_Extension.webp'),
+  'Quads/Pendulum_Squat': require('./assets/exercises/Quads/Pendulum_Squat.png'),
   'Quads/Plate_Loaded_Single_Leg_Extension': require('./assets/exercises/Quads/Plate_Loaded_Single_Leg_Extension.webp'),
   'Quads/Saftey_Bar_Squat': require('./assets/exercises/Quads/Saftey_Bar_Squat.webp'),
   'Quads/Seated_Leg_Press': require('./assets/exercises/Quads/Seated_Leg_Press.webp'),

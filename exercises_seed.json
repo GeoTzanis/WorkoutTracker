@@ -20,7 +20,7 @@
     "name": "Cable Kneeling Crunch",
     "muscle": "Abs",
     "equipment": "Cable",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Cable_Kneeling_Crunch"
   },
   {
@@ -36,7 +36,7 @@
     "name": "Cable Standing Crunch",
     "muscle": "Abs",
     "equipment": "Cable",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Cable_Standing_Crunch"
   },
   {
@@ -52,7 +52,7 @@
     "name": "Captains Chair Straight Leg Raise",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Captains_Chair_Straight_Leg_Raise"
   },
   {
@@ -60,7 +60,7 @@
     "name": "Crunch Floor",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Crunch_Floor"
   },
   {
@@ -68,7 +68,7 @@
     "name": "Decline Crunch",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Decline_Crunch"
   },
   {
@@ -76,7 +76,7 @@
     "name": "Dragon Flag",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Dragon_Flag"
   },
   {
@@ -108,7 +108,7 @@
     "name": "Front Plank",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Front_Plank"
   },
   {
@@ -156,7 +156,7 @@
     "name": "Lever Abdominal Crunch Machine",
     "muscle": "Abs",
     "equipment": "Machine",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Lever_Abdominal_Crunch_Machine"
   },
   {
@@ -164,7 +164,7 @@
     "name": "Lever Seated Full Crunch",
     "muscle": "Abs",
     "equipment": "Machine",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Lever_Seated_Full_Crunch"
   },
   {
@@ -180,7 +180,7 @@
     "name": "Lying Leg Raises",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Lying_Leg_Raises"
   },
   {
@@ -188,7 +188,7 @@
     "name": "Reverse Crunch",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Reverse_Crunch"
   },
   {
@@ -204,7 +204,7 @@
     "name": "Seated Crunch Machine",
     "muscle": "Abs",
     "equipment": "Machine",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Seated_Crunch_Machine"
   },
   {
@@ -212,7 +212,7 @@
     "name": "Seated Leg Raise",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Seated_Leg_Raise"
   },
   {
@@ -220,7 +220,7 @@
     "name": "Side Plank",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Side_Plank"
   },
   {
@@ -228,7 +228,7 @@
     "name": "Sit Ups",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Sit_Ups"
   },
   {
@@ -236,7 +236,7 @@
     "name": "Weighted Crunch",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Abs/Weighted_Crunch"
   },
   {
@@ -676,7 +676,7 @@
     "name": "Pull up",
     "muscle": "Back",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Back/Pull_up"
   },
   {
@@ -788,7 +788,7 @@
     "name": "Suspended Row",
     "muscle": "Back",
     "equipment": "Other",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Back/Suspended_Row"
   },
   {
@@ -1404,7 +1404,7 @@
     "name": "Bodyweight Standing Calf Raise",
     "muscle": "Calves",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Calves/Bodyweight_Stnading_Calf_Raise"
   },
   {
@@ -1708,7 +1708,7 @@
     "name": "Chest Dips",
     "muscle": "Chest",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Chest/Chest_Dips"
   },
   {
@@ -1772,7 +1772,7 @@
     "name": "Dip Hold Isometric",
     "muscle": "Chest",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Chest/Dip_Hold_Isometric"
   },
   {
@@ -2052,7 +2052,7 @@
     "name": "Push Ups",
     "muscle": "Chest",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Chest/Push_Ups"
   },
   {
@@ -2148,7 +2148,7 @@
     "name": "Weighted Bench Dips",
     "muscle": "Chest",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Chest/Weighted_Bench_Dips"
   },
   {
@@ -2156,7 +2156,7 @@
     "name": "Weighted Dips",
     "muscle": "Chest",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Chest/Weighted_Dips"
   },
   {
@@ -2876,7 +2876,7 @@
     "name": "Lever Reverse Hyperextension",
     "muscle": "Glutes",
     "equipment": "Machine",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Glutes/Lever_Reverse_Hyperextension"
   },
   {
@@ -2964,7 +2964,7 @@
     "name": "Rounded Back Extension",
     "muscle": "Glutes",
     "equipment": "Other",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Glutes/Rounded_Back_Extension"
   },
   {
@@ -3316,7 +3316,7 @@
     "name": "Bodyweight Kneeling Sissy Squat",
     "muscle": "Quads",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Quads/Bodyweight_Kneeling_Sissy_Squat"
   },
   {
@@ -3324,7 +3324,7 @@
     "name": "Bodyweight Squat",
     "muscle": "Quads",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Quads/Bodyweight_Squat"
   },
   {
@@ -3332,7 +3332,7 @@
     "name": "Bodyweight Wall Squat",
     "muscle": "Quads",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Quads/Bodyweight_Wall_Squat"
   },
   {
@@ -3529,6 +3529,14 @@
   },
   {
     "id": 442,
+    "name": "Pendulum Squat",
+    "muscle": "Quads",
+    "equipment": "Bodyweight",
+    "isBodyweight": false,
+    "image": "Quads/Pendulum_Squat"
+  },
+  {
+    "id": 443,
     "name": "Plate Loaded Single Leg Extension",
     "muscle": "Quads",
     "equipment": "Machine",
@@ -3536,7 +3544,7 @@
     "image": "Quads/Plate_Loaded_Single_Leg_Extension"
   },
   {
-    "id": 443,
+    "id": 444,
     "name": "Safety Bar Squat",
     "muscle": "Quads",
     "equipment": "Barbell",
@@ -3544,7 +3552,7 @@
     "image": "Quads/Saftey_Bar_Squat"
   },
   {
-    "id": 444,
+    "id": 445,
     "name": "Seated Leg Press",
     "muscle": "Quads",
     "equipment": "Other",
@@ -3552,7 +3560,7 @@
     "image": "Quads/Seated_Leg_Press"
   },
   {
-    "id": 445,
+    "id": 446,
     "name": "Side Lunge",
     "muscle": "Quads",
     "equipment": "Bodyweight",
@@ -3560,7 +3568,7 @@
     "image": "Quads/Side_Lunge"
   },
   {
-    "id": 446,
+    "id": 447,
     "name": "Single Leg Extension",
     "muscle": "Quads",
     "equipment": "Other",
@@ -3568,7 +3576,7 @@
     "image": "Quads/Single_Leg_Extension"
   },
   {
-    "id": 447,
+    "id": 448,
     "name": "Single Leg Press",
     "muscle": "Quads",
     "equipment": "Other",
@@ -3576,7 +3584,7 @@
     "image": "Quads/Single_Leg_Press"
   },
   {
-    "id": 448,
+    "id": 449,
     "name": "Single Leg Smith Squat",
     "muscle": "Quads",
     "equipment": "Machine",
@@ -3584,7 +3592,7 @@
     "image": "Quads/Single_Leg_Smith_Squat"
   },
   {
-    "id": 449,
+    "id": 450,
     "name": "Single Leg Squat",
     "muscle": "Quads",
     "equipment": "Bodyweight",
@@ -3592,7 +3600,7 @@
     "image": "Quads/Single_Leg_Squat"
   },
   {
-    "id": 450,
+    "id": 451,
     "name": "Sissy Squat",
     "muscle": "Quads",
     "equipment": "Bodyweight",
@@ -3600,7 +3608,7 @@
     "image": "Quads/Sissy_Squat"
   },
   {
-    "id": 451,
+    "id": 452,
     "name": "Sled 45 Degree Press",
     "muscle": "Quads",
     "equipment": "Machine",
@@ -3608,7 +3616,7 @@
     "image": "Quads/Sled_45_Degree_Press"
   },
   {
-    "id": 452,
+    "id": 453,
     "name": "Sled Lying Squat",
     "muscle": "Quads",
     "equipment": "Machine",
@@ -3616,7 +3624,7 @@
     "image": "Quads/Sled_Lying_Squat"
   },
   {
-    "id": 453,
+    "id": 454,
     "name": "Sled Push",
     "muscle": "Quads",
     "equipment": "Machine",
@@ -3624,7 +3632,7 @@
     "image": "Quads/Sled_Push"
   },
   {
-    "id": 454,
+    "id": 455,
     "name": "Smith Front Squat",
     "muscle": "Quads",
     "equipment": "Machine",
@@ -3632,7 +3640,7 @@
     "image": "Quads/Smith_Front_Squat"
   },
   {
-    "id": 455,
+    "id": 456,
     "name": "Smith Leg Press",
     "muscle": "Quads",
     "equipment": "Machine",
@@ -3640,7 +3648,7 @@
     "image": "Quads/Smith_Leg_Press"
   },
   {
-    "id": 456,
+    "id": 457,
     "name": "Smith Lunge",
     "muscle": "Quads",
     "equipment": "Machine",
@@ -3648,7 +3656,7 @@
     "image": "Quads/Smith_Lunge"
   },
   {
-    "id": 457,
+    "id": 458,
     "name": "Smith Rear Lunge",
     "muscle": "Quads",
     "equipment": "Machine",
@@ -3656,7 +3664,7 @@
     "image": "Quads/Smith_Rear_Lunge"
   },
   {
-    "id": 458,
+    "id": 459,
     "name": "Smith Single Leg Squat",
     "muscle": "Quads",
     "equipment": "Machine",
@@ -3664,7 +3672,7 @@
     "image": "Quads/Smith_Single_Leg_Squat"
   },
   {
-    "id": 459,
+    "id": 460,
     "name": "Smith Squat",
     "muscle": "Quads",
     "equipment": "Machine",
@@ -3672,7 +3680,7 @@
     "image": "Quads/Smith_Squat"
   },
   {
-    "id": 460,
+    "id": 461,
     "name": "Sumo Deadlift",
     "muscle": "Quads",
     "equipment": "Other",
@@ -3680,7 +3688,7 @@
     "image": "Quads/Sumo_Deadlift"
   },
   {
-    "id": 461,
+    "id": 462,
     "name": "Suspension Squat",
     "muscle": "Quads",
     "equipment": "Bodyweight",
@@ -3688,7 +3696,7 @@
     "image": "Quads/Suspension_Squat"
   },
   {
-    "id": 462,
+    "id": 463,
     "name": "Trap Bar Deadlift",
     "muscle": "Quads",
     "equipment": "Barbell",
@@ -3696,7 +3704,7 @@
     "image": "Quads/Trap_Bar_Deadlift"
   },
   {
-    "id": 463,
+    "id": 464,
     "name": "Walking Lunge",
     "muscle": "Quads",
     "equipment": "Bodyweight",
@@ -3704,7 +3712,7 @@
     "image": "Quads/Walking_Lunge"
   },
   {
-    "id": 464,
+    "id": 465,
     "name": "Weighted Sissy Squat",
     "muscle": "Quads",
     "equipment": "Bodyweight",
@@ -3712,7 +3720,7 @@
     "image": "Quads/Weighted_Sissy_Squat"
   },
   {
-    "id": 465,
+    "id": 466,
     "name": "Weighted Stretch Lunge",
     "muscle": "Quads",
     "equipment": "Bodyweight",
@@ -3720,7 +3728,7 @@
     "image": "Quads/Weighted_Stretch_Lunge"
   },
   {
-    "id": 466,
+    "id": 467,
     "name": "Wide Stance Hack Squat",
     "muscle": "Quads",
     "equipment": "Bodyweight",
@@ -3728,7 +3736,7 @@
     "image": "Quads/Wide_Stance_Hack_Squat"
   },
   {
-    "id": 467,
+    "id": 468,
     "name": "Zercher Squat",
     "muscle": "Quads",
     "equipment": "Bodyweight",
@@ -3736,7 +3744,7 @@
     "image": "Quads/Zercher_Squat"
   },
   {
-    "id": 468,
+    "id": 469,
     "name": "Archers Cable Pull",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3744,7 +3752,7 @@
     "image": "Shoulders/Archers_Cable_Pull"
   },
   {
-    "id": 469,
+    "id": 470,
     "name": "Arnold Press",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -3752,7 +3760,7 @@
     "image": "Shoulders/Arnold_Press"
   },
   {
-    "id": 470,
+    "id": 471,
     "name": "Barbell Clean And Press",
     "muscle": "Shoulders",
     "equipment": "Barbell",
@@ -3760,7 +3768,7 @@
     "image": "Shoulders/Barbell_Clean_And_Press"
   },
   {
-    "id": 471,
+    "id": 472,
     "name": "Barbell Front Raise",
     "muscle": "Shoulders",
     "equipment": "Barbell",
@@ -3768,7 +3776,7 @@
     "image": "Shoulders/Barbell_Front_Raise"
   },
   {
-    "id": 472,
+    "id": 473,
     "name": "Barbell Incline Shoulder Press",
     "muscle": "Shoulders",
     "equipment": "Barbell",
@@ -3776,7 +3784,7 @@
     "image": "Shoulders/Barbell_Incline_Shoulder_Press"
   },
   {
-    "id": 473,
+    "id": 474,
     "name": "Barbell Military Press",
     "muscle": "Shoulders",
     "equipment": "Barbell",
@@ -3784,7 +3792,7 @@
     "image": "Shoulders/Barbell_Military_Press"
   },
   {
-    "id": 474,
+    "id": 475,
     "name": "Barbell Rear Delt Raise",
     "muscle": "Shoulders",
     "equipment": "Barbell",
@@ -3792,7 +3800,7 @@
     "image": "Shoulders/Barbell_Rear_Delt_Raise"
   },
   {
-    "id": 475,
+    "id": 476,
     "name": "Barbell Seated Shoulder Press",
     "muscle": "Shoulders",
     "equipment": "Barbell",
@@ -3800,7 +3808,7 @@
     "image": "Shoulders/Barbell_Seated_Shoulder_Press"
   },
   {
-    "id": 476,
+    "id": 477,
     "name": "Barbell Upright Row",
     "muscle": "Shoulders",
     "equipment": "Barbell",
@@ -3808,7 +3816,7 @@
     "image": "Shoulders/Barbell_Upright_Row"
   },
   {
-    "id": 477,
+    "id": 478,
     "name": "Behind The Head Seated Military Press",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -3816,7 +3824,7 @@
     "image": "Shoulders/Bedind_The_Head_Seated_Military_Press"
   },
   {
-    "id": 478,
+    "id": 479,
     "name": "Cable Bent Over One Arm Lateral Raise",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3824,7 +3832,7 @@
     "image": "Shoulders/Cable_Bent_Over_One_Arm_Lateral_Raise"
   },
   {
-    "id": 479,
+    "id": 480,
     "name": "Cable Chest Supported Rear Delt Fly",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3832,7 +3840,7 @@
     "image": "Shoulders/Cable_Chest_Supported_Rear_Delt_Fly"
   },
   {
-    "id": 480,
+    "id": 481,
     "name": "Cable Face Pull",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3840,7 +3848,7 @@
     "image": "Shoulders/Cable_Face_Pull"
   },
   {
-    "id": 481,
+    "id": 482,
     "name": "Cable Front Raise",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3848,7 +3856,7 @@
     "image": "Shoulders/Cable_Front_Raise"
   },
   {
-    "id": 482,
+    "id": 483,
     "name": "Cable Incline Cross Rear Fly",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3856,7 +3864,7 @@
     "image": "Shoulders/Cable_Incline_Cross_Rear_Fly"
   },
   {
-    "id": 483,
+    "id": 484,
     "name": "Cable Incline Rear Delt Fly Back Support",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3864,7 +3872,7 @@
     "image": "Shoulders/Cable_Incline_Rear_Delt_Fly_Back_Support"
   },
   {
-    "id": 484,
+    "id": 485,
     "name": "Cable Lateral Raises",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3872,7 +3880,7 @@
     "image": "Shoulders/Cable_Lateral_Raises"
   },
   {
-    "id": 485,
+    "id": 486,
     "name": "Cable Leaning Lateral Raise",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3880,7 +3888,7 @@
     "image": "Shoulders/Cable_Leaning_Lateral_Raise"
   },
   {
-    "id": 486,
+    "id": 487,
     "name": "Cable Lying Cross Lateral Raise",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3888,7 +3896,7 @@
     "image": "Shoulders/Cable_Lying_Cross_Lateral_Raise"
   },
   {
-    "id": 487,
+    "id": 488,
     "name": "Cable Lying Face Push",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3896,7 +3904,7 @@
     "image": "Shoulders/Cable_Lying_Face_Push"
   },
   {
-    "id": 488,
+    "id": 489,
     "name": "Cable One Arm Front Raise",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3904,7 +3912,7 @@
     "image": "Shoulders/Cable_One_Arm_Front_Raise"
   },
   {
-    "id": 489,
+    "id": 490,
     "name": "Cable One Arm Lateral Raise",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3912,7 +3920,7 @@
     "image": "Shoulders/Cable_One_Arm_Lateral_Raise"
   },
   {
-    "id": 490,
+    "id": 491,
     "name": "Cable One Arm Reverse Fly",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3920,7 +3928,7 @@
     "image": "Shoulders/Cable_One_Arm_Reverse_Fly"
   },
   {
-    "id": 491,
+    "id": 492,
     "name": "Cable Over Reverse Fly",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3928,7 +3936,7 @@
     "image": "Shoulders/Cable_Over_Reverse_Fly"
   },
   {
-    "id": 492,
+    "id": 493,
     "name": "Cable Rear Delt Row",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3936,7 +3944,7 @@
     "image": "Shoulders/Cable_Rear_Delt_Row"
   },
   {
-    "id": 493,
+    "id": 494,
     "name": "Cable Rear Delt Row",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3944,7 +3952,7 @@
     "image": "Shoulders/Cable_Rear_Delt_Row_"
   },
   {
-    "id": 494,
+    "id": 495,
     "name": "Cable Shoulder Internal Rotation",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3952,7 +3960,7 @@
     "image": "Shoulders/Cable_Shoulder_Internal_Rotation"
   },
   {
-    "id": 495,
+    "id": 496,
     "name": "Cable Shoulder Press",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3960,7 +3968,7 @@
     "image": "Shoulders/Cable_Shoulder_Press"
   },
   {
-    "id": 496,
+    "id": 497,
     "name": "Cable Single Arm Neutral Grip Front Raise",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3968,7 +3976,7 @@
     "image": "Shoulders/Cable_Single_Arm_Neutral_Grip_Front_Raise"
   },
   {
-    "id": 497,
+    "id": 498,
     "name": "Cable Standing Around World",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3976,7 +3984,7 @@
     "image": "Shoulders/Cable_Standing_Around_World"
   },
   {
-    "id": 498,
+    "id": 499,
     "name": "Cable Standing Cross High Reverse Fly",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3984,7 +3992,7 @@
     "image": "Shoulders/Cable_Standing_Cross_High_Reverse_Fly"
   },
   {
-    "id": 499,
+    "id": 500,
     "name": "Cable Standing Face Pull",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -3992,7 +4000,7 @@
     "image": "Shoulders/Cable_Standing_Face_Pull"
   },
   {
-    "id": 500,
+    "id": 501,
     "name": "Cable Standing Rear Delt Row",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -4000,7 +4008,7 @@
     "image": "Shoulders/Cable_Standing_Rear_Delt_Row"
   },
   {
-    "id": 501,
+    "id": 502,
     "name": "Cable Supine Reverse Fly",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -4008,7 +4016,7 @@
     "image": "Shoulders/Cable_Supine_Reverse_Fly"
   },
   {
-    "id": 502,
+    "id": 503,
     "name": "Cable Upright Row",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -4016,7 +4024,7 @@
     "image": "Shoulders/Cable_Upright_Row"
   },
   {
-    "id": 503,
+    "id": 504,
     "name": "Cable Y Raise",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -4024,7 +4032,7 @@
     "image": "Shoulders/Cable_Y_Raise"
   },
   {
-    "id": 504,
+    "id": 505,
     "name": "Chest Supported Dumbbell Incline Front Raise",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4032,7 +4040,7 @@
     "image": "Shoulders/Chest_Supported_Dumbell_Incline_Front_Raise"
   },
   {
-    "id": 505,
+    "id": 506,
     "name": "Chest Supported Dumbbell Lateral Raise",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4040,7 +4048,7 @@
     "image": "Shoulders/Chest_Supported_Dumbell_Lateral_Raise"
   },
   {
-    "id": 506,
+    "id": 507,
     "name": "Dumbbell Incline One Arm Lateral Raise",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4048,7 +4056,7 @@
     "image": "Shoulders/Dumbbell_Incline_One_Arm_Lateral_Raise"
   },
   {
-    "id": 507,
+    "id": 508,
     "name": "Dumbbell Lying One Arm Deltoid Rear",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4056,7 +4064,7 @@
     "image": "Shoulders/Dumbbell_Lying_One_Arm_Deltoid_Rear"
   },
   {
-    "id": 508,
+    "id": 509,
     "name": "Dumbbell Seated External Shoulder Rotation",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4064,7 +4072,7 @@
     "image": "Shoulders/Dumbbell_Seated_External_Shoulder_Rotation"
   },
   {
-    "id": 509,
+    "id": 510,
     "name": "Dumbbell Standing Alternate Vertical Front Raises",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4072,7 +4080,7 @@
     "image": "Shoulders/Dumbbell_Standing_Alternate_Vertical_Front_Raises"
   },
   {
-    "id": 510,
+    "id": 511,
     "name": "Dumbbell Standing Overhead Press",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4080,7 +4088,7 @@
     "image": "Shoulders/Dumbbell_Standing_Overhead_Press"
   },
   {
-    "id": 511,
+    "id": 512,
     "name": "Dumbbell Front Raise",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4088,7 +4096,7 @@
     "image": "Shoulders/Dumbell_Front_Raise"
   },
   {
-    "id": 512,
+    "id": 513,
     "name": "Dumbbell Hammer Grip Press",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4096,7 +4104,7 @@
     "image": "Shoulders/Dumbell_Hammer_Grip_Press"
   },
   {
-    "id": 513,
+    "id": 514,
     "name": "Dumbbell Incline Y Raise",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4104,7 +4112,7 @@
     "image": "Shoulders/Dumbell_Incline_Y_Raise"
   },
   {
-    "id": 514,
+    "id": 515,
     "name": "Dumbbell Lateral Raise",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4112,7 +4120,7 @@
     "image": "Shoulders/Dumbell_Lateral_Raise"
   },
   {
-    "id": 515,
+    "id": 516,
     "name": "Dumbbell Rear Delt Fly",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4120,7 +4128,7 @@
     "image": "Shoulders/Dumbell_Rear_Delt_Fly"
   },
   {
-    "id": 516,
+    "id": 517,
     "name": "Dumbbell Shoulder Press",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4128,7 +4136,7 @@
     "image": "Shoulders/Dumbell_Shoulder_Press"
   },
   {
-    "id": 517,
+    "id": 518,
     "name": "Dumbbell Single Arm Leaning Lateral Raise",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4136,7 +4144,7 @@
     "image": "Shoulders/Dumbell_Single_Arm_Leaning_Lateral_Raise"
   },
   {
-    "id": 518,
+    "id": 519,
     "name": "Dumbbell Upright Row",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4144,7 +4152,7 @@
     "image": "Shoulders/Dumbell_Upright_Row"
   },
   {
-    "id": 519,
+    "id": 520,
     "name": "Ez Bar Standing Overhead Press",
     "muscle": "Shoulders",
     "equipment": "Barbell",
@@ -4152,7 +4160,7 @@
     "image": "Shoulders/Ez_Bar_Standing_Overhead_Press"
   },
   {
-    "id": 520,
+    "id": 521,
     "name": "Ez Bar Upright Row",
     "muscle": "Shoulders",
     "equipment": "Barbell",
@@ -4160,7 +4168,7 @@
     "image": "Shoulders/Ez_Bar_Upright_Row"
   },
   {
-    "id": 521,
+    "id": 522,
     "name": "Front Cable Raise",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -4168,7 +4176,7 @@
     "image": "Shoulders/Front_Cable_Raise"
   },
   {
-    "id": 522,
+    "id": 523,
     "name": "Hammer Grip Shoulder Press Machine",
     "muscle": "Shoulders",
     "equipment": "Machine",
@@ -4176,7 +4184,7 @@
     "image": "Shoulders/Hammer_Grip_Shoulder_Press_Machine"
   },
   {
-    "id": 523,
+    "id": 524,
     "name": "Handstand Push Up",
     "muscle": "Shoulders",
     "equipment": "Bodyweight",
@@ -4184,7 +4192,7 @@
     "image": "Shoulders/Handstand_Push_Up"
   },
   {
-    "id": 524,
+    "id": 525,
     "name": "Incline Rear Delt Fly",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4192,7 +4200,7 @@
     "image": "Shoulders/Incline_Rear_Delt_Fly"
   },
   {
-    "id": 525,
+    "id": 526,
     "name": "Kneeling Face Pull",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4200,7 +4208,7 @@
     "image": "Shoulders/Kneeling_Face_Pull"
   },
   {
-    "id": 526,
+    "id": 527,
     "name": "Landmine Kneeling One Arm Shoulder Press",
     "muscle": "Shoulders",
     "equipment": "Barbell",
@@ -4208,7 +4216,7 @@
     "image": "Shoulders/Landmine_Kneeling_One_Arm_Shoulder_Press"
   },
   {
-    "id": 527,
+    "id": 528,
     "name": "Lateral Raise Machine",
     "muscle": "Shoulders",
     "equipment": "Machine",
@@ -4216,7 +4224,7 @@
     "image": "Shoulders/Lateral_Raise_Machine"
   },
   {
-    "id": 528,
+    "id": 529,
     "name": "Lever Lateral Raise Machine",
     "muscle": "Shoulders",
     "equipment": "Machine",
@@ -4224,7 +4232,7 @@
     "image": "Shoulders/Lever_Lateral_Raise_Machine"
   },
   {
-    "id": 529,
+    "id": 530,
     "name": "Lever Shoulder Press",
     "muscle": "Shoulders",
     "equipment": "Machine",
@@ -4232,7 +4240,7 @@
     "image": "Shoulders/Lever_Shoulder_Press"
   },
   {
-    "id": 530,
+    "id": 531,
     "name": "Lever Shoulder Press",
     "muscle": "Shoulders",
     "equipment": "Machine",
@@ -4240,7 +4248,7 @@
     "image": "Shoulders/Lever_Shoulder_Press_"
   },
   {
-    "id": 531,
+    "id": 532,
     "name": "Machine Shoulder Press",
     "muscle": "Shoulders",
     "equipment": "Machine",
@@ -4248,7 +4256,7 @@
     "image": "Shoulders/Machine_Shoulder_Press"
   },
   {
-    "id": 532,
+    "id": 533,
     "name": "Pike Push Up",
     "muscle": "Shoulders",
     "equipment": "Bodyweight",
@@ -4256,7 +4264,7 @@
     "image": "Shoulders/Pike_Push_Up"
   },
   {
-    "id": 533,
+    "id": 534,
     "name": "Plate Loaded Lever Lateral Raise",
     "muscle": "Shoulders",
     "equipment": "Machine",
@@ -4264,7 +4272,7 @@
     "image": "Shoulders/Plate_Loaded_Lever_Lateral_Raise"
   },
   {
-    "id": 534,
+    "id": 535,
     "name": "Rear Delt Fly",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4272,7 +4280,7 @@
     "image": "Shoulders/Rear_Delt_Fly"
   },
   {
-    "id": 535,
+    "id": 536,
     "name": "Rear Delt Fly",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4280,7 +4288,7 @@
     "image": "Shoulders/Rear_Delt_Fly_"
   },
   {
-    "id": 536,
+    "id": 537,
     "name": "Rear Delt Row",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4288,7 +4296,7 @@
     "image": "Shoulders/Rear_Delt_Row"
   },
   {
-    "id": 537,
+    "id": 538,
     "name": "Rear Delt Row Shoulder",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4296,7 +4304,7 @@
     "image": "Shoulders/Rear_Delt_Row_Shoulder"
   },
   {
-    "id": 538,
+    "id": 539,
     "name": "Seated Bent Arm Lateral Raise",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4304,7 +4312,7 @@
     "image": "Shoulders/Seated_Bent_Arm_Lateral_Raise"
   },
   {
-    "id": 539,
+    "id": 540,
     "name": "Seated Cable Face Pulls",
     "muscle": "Shoulders",
     "equipment": "Cable",
@@ -4312,7 +4320,7 @@
     "image": "Shoulders/Seated_Cable_Face_Pulls"
   },
   {
-    "id": 540,
+    "id": 541,
     "name": "Seated Front Raise",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4320,7 +4328,7 @@
     "image": "Shoulders/Seated_Front_Raise"
   },
   {
-    "id": 541,
+    "id": 542,
     "name": "Seated Lateral Raise",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4328,7 +4336,7 @@
     "image": "Shoulders/Seated_Lateral_Raise"
   },
   {
-    "id": 542,
+    "id": 543,
     "name": "Seated  Dumbbell Rear Delt Fly",
     "muscle": "Shoulders",
     "equipment": "Dumbbell",
@@ -4336,7 +4344,7 @@
     "image": "Shoulders/Seated__Dumbell_Rear_Delt_Fly"
   },
   {
-    "id": 543,
+    "id": 544,
     "name": "Single Arm Standing Press",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4344,7 +4352,7 @@
     "image": "Shoulders/Single_Arm_Stantinding_Press"
   },
   {
-    "id": 544,
+    "id": 545,
     "name": "Smith Behind The Head Press",
     "muscle": "Shoulders",
     "equipment": "Machine",
@@ -4352,7 +4360,7 @@
     "image": "Shoulders/Smith_Behind_The_Head_Press"
   },
   {
-    "id": 545,
+    "id": 546,
     "name": "Smith Shoulder Press",
     "muscle": "Shoulders",
     "equipment": "Machine",
@@ -4360,7 +4368,7 @@
     "image": "Shoulders/Smith_Shoulder_Press"
   },
   {
-    "id": 546,
+    "id": 547,
     "name": "Smith Standing Overhead Press",
     "muscle": "Shoulders",
     "equipment": "Machine",
@@ -4368,7 +4376,7 @@
     "image": "Shoulders/Smith_Standing_Overhead_Press"
   },
   {
-    "id": 547,
+    "id": 548,
     "name": "Smith Upright Row",
     "muscle": "Shoulders",
     "equipment": "Machine",
@@ -4376,7 +4384,7 @@
     "image": "Shoulders/Smith_Upright_Row"
   },
   {
-    "id": 548,
+    "id": 549,
     "name": "Standing Alternate Raise",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4384,7 +4392,7 @@
     "image": "Shoulders/Standing_Alternate_Raise"
   },
   {
-    "id": 549,
+    "id": 550,
     "name": "Standing Military Press",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4392,7 +4400,7 @@
     "image": "Shoulders/Standing_Military_Press"
   },
   {
-    "id": 550,
+    "id": 551,
     "name": "Standing Wide Press",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4400,7 +4408,7 @@
     "image": "Shoulders/Standing_Wide_Press"
   },
   {
-    "id": 551,
+    "id": 552,
     "name": "Weighted Front Raise",
     "muscle": "Shoulders",
     "equipment": "Other",
@@ -4408,7 +4416,7 @@
     "image": "Shoulders/Weighted_Front_Raise"
   },
   {
-    "id": 552,
+    "id": 553,
     "name": "Lever Military Press",
     "muscle": "Shoulders",
     "equipment": "Machine",
@@ -4416,7 +4424,7 @@
     "image": "Shoulders/_Lever_Military_Press"
   },
   {
-    "id": 553,
+    "id": 554,
     "name": "Assisted Triceps Dip",
     "muscle": "Triceps",
     "equipment": "Machine",
@@ -4424,7 +4432,7 @@
     "image": "Triceps/Assisted_Triceps_Dip"
   },
   {
-    "id": 554,
+    "id": 555,
     "name": "Barbell Decline Close Grip To Skull Press",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4432,7 +4440,7 @@
     "image": "Triceps/Barbell_Decline_Close_Grip_To_Skull_Press"
   },
   {
-    "id": 555,
+    "id": 556,
     "name": "Barbell Decline Close Grip To Skull Press",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4440,7 +4448,7 @@
     "image": "Triceps/Barbell_Decline_Close_Grip_To_Skull_Press_"
   },
   {
-    "id": 556,
+    "id": 557,
     "name": "Barbell Incline Triceps Extension Skull Crusher",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4448,7 +4456,7 @@
     "image": "Triceps/Barbell_Incline_Triceps_Extension_Skull_Crusher"
   },
   {
-    "id": 557,
+    "id": 558,
     "name": "Barbell JM Bench Press",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4456,7 +4464,7 @@
     "image": "Triceps/Barbell_JM_Bench_Press"
   },
   {
-    "id": 558,
+    "id": 559,
     "name": "Barbell Lying Back Of The Head Tricep Extension",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4464,7 +4472,7 @@
     "image": "Triceps/Barbell_Lying_Back_Of_The_Head_Tricep_Extension"
   },
   {
-    "id": 559,
+    "id": 560,
     "name": "Barbell Lying Close Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4472,7 +4480,7 @@
     "image": "Triceps/Barbell_Lying_Close_Triceps_Extension"
   },
   {
-    "id": 560,
+    "id": 561,
     "name": "Barbell Lying Triceps Extension Skull Crusher",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4480,7 +4488,7 @@
     "image": "Triceps/Barbell_Lying_Triceps_Extension_Skull_Crusher"
   },
   {
-    "id": 561,
+    "id": 562,
     "name": "Barbell Standing Overhead Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4488,15 +4496,15 @@
     "image": "Triceps/Barbell_Standing_Overhead_Triceps_Extension"
   },
   {
-    "id": 562,
+    "id": 563,
     "name": "Bench Dip",
     "muscle": "Triceps",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Triceps/Bench_Dip"
   },
   {
-    "id": 563,
+    "id": 564,
     "name": "Bench Dips",
     "muscle": "Triceps",
     "equipment": "Bodyweight",
@@ -4504,7 +4512,7 @@
     "image": "Triceps/Bench_Dips"
   },
   {
-    "id": 564,
+    "id": 565,
     "name": "Cable Attachment Overhead Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4512,7 +4520,7 @@
     "image": "Triceps/Cable_Attachment_Overhead_Extension"
   },
   {
-    "id": 565,
+    "id": 566,
     "name": "Cable Bent Over Kickback",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4520,7 +4528,7 @@
     "image": "Triceps/Cable_Bent_Over_Kickback"
   },
   {
-    "id": 566,
+    "id": 567,
     "name": "Cable High Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4528,7 +4536,7 @@
     "image": "Triceps/Cable_High_Triceps_Extension"
   },
   {
-    "id": 567,
+    "id": 568,
     "name": "Cable Incline Bench Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4536,7 +4544,7 @@
     "image": "Triceps/Cable_Incline_Bench_Triceps_Extension"
   },
   {
-    "id": 568,
+    "id": 569,
     "name": "Cable Kickback",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4544,7 +4552,7 @@
     "image": "Triceps/Cable_Kickback"
   },
   {
-    "id": 569,
+    "id": 570,
     "name": "Cable Lying Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4552,7 +4560,7 @@
     "image": "Triceps/Cable_Lying_Triceps_Extension"
   },
   {
-    "id": 570,
+    "id": 571,
     "name": "Cable One Arm High Pulley Overhead Tricep Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4560,7 +4568,7 @@
     "image": "Triceps/Cable_One_Arm_High_Pulley_Overhead_Tricep_Extension"
   },
   {
-    "id": 571,
+    "id": 572,
     "name": "Cable One Arm Side Triceps Pushdown",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4568,7 +4576,7 @@
     "image": "Triceps/Cable_One_Arm_Side_Triceps_Pushdown"
   },
   {
-    "id": 572,
+    "id": 573,
     "name": "Cable One Arm Tricep Pushdown",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4576,7 +4584,7 @@
     "image": "Triceps/Cable_One_Arm_Tricep_Pushdown"
   },
   {
-    "id": 573,
+    "id": 574,
     "name": "Cable Overhead Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4584,7 +4592,7 @@
     "image": "Triceps/Cable_Overhead_Extension"
   },
   {
-    "id": 574,
+    "id": 575,
     "name": "Cable PushDown",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4592,7 +4600,7 @@
     "image": "Triceps/Cable_PushDown_"
   },
   {
-    "id": 575,
+    "id": 576,
     "name": "Cable Pushdown",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4600,7 +4608,7 @@
     "image": "Triceps/Cable_Pushdown"
   },
   {
-    "id": 576,
+    "id": 577,
     "name": "Cable Rope Incline Tricep Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4608,7 +4616,7 @@
     "image": "Triceps/Cable_Rope_Incline_Tricep_Extension"
   },
   {
-    "id": 577,
+    "id": 578,
     "name": "Cable Rope Overhead Tricep Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4616,7 +4624,7 @@
     "image": "Triceps/Cable_Rope_Overhead_Tricep_Extension"
   },
   {
-    "id": 578,
+    "id": 579,
     "name": "Cable Seated High Pulley Overhead Tricep Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4624,7 +4632,7 @@
     "image": "Triceps/Cable_Seated_High_Pulley_Overhead_Tricep_Extension"
   },
   {
-    "id": 579,
+    "id": 580,
     "name": "Cable Standing Crossover Tricep Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4632,7 +4640,7 @@
     "image": "Triceps/Cable_Standing_Crossover_Tricep_Extension"
   },
   {
-    "id": 580,
+    "id": 581,
     "name": "Cable Standing High Cross Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4640,7 +4648,7 @@
     "image": "Triceps/Cable_Standing_High_Cross_Triceps_Extension"
   },
   {
-    "id": 581,
+    "id": 582,
     "name": "Cable Standing One Arm Cross Body Tricep Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4648,7 +4656,7 @@
     "image": "Triceps/Cable_Standing_One_Arm_Cross_Body_Tricep_Extension"
   },
   {
-    "id": 582,
+    "id": 583,
     "name": "Cable Standing One Arm Reverse Grip Tricep Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4656,7 +4664,7 @@
     "image": "Triceps/Cable_Standing_One_Arm_Reverse_Grip_Tricep_Extension"
   },
   {
-    "id": 583,
+    "id": 584,
     "name": "Cable Standing One Arm Tricep Pushdown",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4664,7 +4672,7 @@
     "image": "Triceps/Cable_Standing_One_Arm_Tricep_Pushdown"
   },
   {
-    "id": 584,
+    "id": 585,
     "name": "Cable Standing One Arm Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4672,7 +4680,7 @@
     "image": "Triceps/Cable_Standing_One_Arm_Triceps_Extension"
   },
   {
-    "id": 585,
+    "id": 586,
     "name": "Cable Straight Bar Overhead Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4680,7 +4688,7 @@
     "image": "Triceps/Cable_Straight_Bar_Overhead_Extension"
   },
   {
-    "id": 586,
+    "id": 587,
     "name": "Cable Triceps Overhead Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4688,7 +4696,7 @@
     "image": "Triceps/Cable_Triceps_Overhead_Extension"
   },
   {
-    "id": 587,
+    "id": 588,
     "name": "Cable Two Arm Tricep Kickback",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4696,7 +4704,7 @@
     "image": "Triceps/Cable_Two_Arm_Tricep_Kickback"
   },
   {
-    "id": 588,
+    "id": 589,
     "name": "Chair Dip",
     "muscle": "Triceps",
     "equipment": "Bodyweight",
@@ -4704,7 +4712,7 @@
     "image": "Triceps/Chair_Dip"
   },
   {
-    "id": 589,
+    "id": 590,
     "name": "Close Grip Bench Press",
     "muscle": "Triceps",
     "equipment": "Other",
@@ -4712,7 +4720,7 @@
     "image": "Triceps/Close_Grip_Bench_Press"
   },
   {
-    "id": 590,
+    "id": 591,
     "name": "Close Grip Push Up",
     "muscle": "Triceps",
     "equipment": "Bodyweight",
@@ -4720,15 +4728,15 @@
     "image": "Triceps/Close_Grip_Push_Up"
   },
   {
-    "id": 591,
+    "id": 592,
     "name": "Diamond Push Ups",
     "muscle": "Triceps",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Triceps/Diamond_Push_Ups"
   },
   {
-    "id": 592,
+    "id": 593,
     "name": "Dip Machine",
     "muscle": "Triceps",
     "equipment": "Machine",
@@ -4736,7 +4744,7 @@
     "image": "Triceps/Dip_Machine"
   },
   {
-    "id": 593,
+    "id": 594,
     "name": "Dumbbell Incline Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4744,7 +4752,7 @@
     "image": "Triceps/Dumbbell_Incline_Triceps_Extension"
   },
   {
-    "id": 594,
+    "id": 595,
     "name": "Dumbbell Lying Floor Skull Crusher",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4752,7 +4760,7 @@
     "image": "Triceps/Dumbbell_Lying_Floor_Skull_Crusher"
   },
   {
-    "id": 595,
+    "id": 596,
     "name": "Dumbbell Lying One Arm Pronated Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4760,7 +4768,7 @@
     "image": "Triceps/Dumbbell_Lying_One_Arm_Pronated_Triceps_Extension"
   },
   {
-    "id": 596,
+    "id": 597,
     "name": "Dumbbell Lying Single Extension",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4768,7 +4776,7 @@
     "image": "Triceps/Dumbbell_Lying_Single_Extension"
   },
   {
-    "id": 597,
+    "id": 598,
     "name": "Dumbbell Prone Triceps Kickback",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4776,7 +4784,7 @@
     "image": "Triceps/Dumbbell_Prone_Triceps_Kickback"
   },
   {
-    "id": 598,
+    "id": 599,
     "name": "Dumbbell Seated Extension",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4784,7 +4792,7 @@
     "image": "Triceps/Dumbbell_Seated_Extension"
   },
   {
-    "id": 599,
+    "id": 600,
     "name": "Dumbbell Seated Reverse Grip One Arm Overhead Tricep Extension",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4792,7 +4800,7 @@
     "image": "Triceps/Dumbbell_Seated_Reverse_Grip_One_Arm_Overhead_Tricep_Extension"
   },
   {
-    "id": 600,
+    "id": 601,
     "name": "Dumbbell Seated Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4800,7 +4808,7 @@
     "image": "Triceps/Dumbbell_Seated_Triceps_Extension"
   },
   {
-    "id": 601,
+    "id": 602,
     "name": "Dumbbell Standing Alternating Tricep Kickback",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4808,7 +4816,7 @@
     "image": "Triceps/Dumbbell_Standing_Alternating_Tricep_Kickback"
   },
   {
-    "id": 602,
+    "id": 603,
     "name": "Dumbbell Standing Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4816,7 +4824,7 @@
     "image": "Triceps/Dumbbell_Standing_Triceps_Extension"
   },
   {
-    "id": 603,
+    "id": 604,
     "name": "Dumbbell Tricep Kickback",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4824,7 +4832,7 @@
     "image": "Triceps/Dumbbell_Tricep_Kickback"
   },
   {
-    "id": 604,
+    "id": 605,
     "name": "Dumbbell Lying Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4832,7 +4840,7 @@
     "image": "Triceps/Dumbell_Lying_Triceps_Extension"
   },
   {
-    "id": 605,
+    "id": 606,
     "name": "EZ Bar Lying Close Grip Triceps Extension Behind Head",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4840,7 +4848,7 @@
     "image": "Triceps/EZ_Bar_Lying_Close_Grip_Triceps_Extension_Behind_Head"
   },
   {
-    "id": 606,
+    "id": 607,
     "name": "EZ Barbell Seated Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4848,7 +4856,7 @@
     "image": "Triceps/EZ_Barbell_Seated_Triceps_Extension"
   },
   {
-    "id": 607,
+    "id": 608,
     "name": "EZ bar Close Grip Bench Press",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4856,7 +4864,7 @@
     "image": "Triceps/EZ_bar_Close_Grip_Bench_Press"
   },
   {
-    "id": 608,
+    "id": 609,
     "name": "Ez Bar Seated Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4864,7 +4872,7 @@
     "image": "Triceps/Ez_Bar_Seated_Triceps_Extension"
   },
   {
-    "id": 609,
+    "id": 610,
     "name": "Ez Bar Standing French Press",
     "muscle": "Triceps",
     "equipment": "Barbell",
@@ -4872,7 +4880,7 @@
     "image": "Triceps/Ez_Bar_Standing_French_Press"
   },
   {
-    "id": 610,
+    "id": 611,
     "name": "Ez Incline Tricep Extension",
     "muscle": "Triceps",
     "equipment": "Other",
@@ -4880,7 +4888,7 @@
     "image": "Triceps/Ez_Incline_Tricep_Extension"
   },
   {
-    "id": 611,
+    "id": 612,
     "name": "High Pulley Overhead Tricep Extension",
     "muscle": "Triceps",
     "equipment": "Other",
@@ -4888,7 +4896,7 @@
     "image": "Triceps/High_Pulley_Overhead_Tricep_Extension"
   },
   {
-    "id": 612,
+    "id": 613,
     "name": "Incline Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Other",
@@ -4896,7 +4904,7 @@
     "image": "Triceps/Incline_Triceps_Extension"
   },
   {
-    "id": 613,
+    "id": 614,
     "name": "Kettlebell Lying Triceps Extension Skull Crusher",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4904,7 +4912,7 @@
     "image": "Triceps/Kettlebell_Lying_Triceps_Extension_Skull_Crusher"
   },
   {
-    "id": 614,
+    "id": 615,
     "name": "Lever Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Machine",
@@ -4912,7 +4920,7 @@
     "image": "Triceps/Lever_Triceps_Extension"
   },
   {
-    "id": 615,
+    "id": 616,
     "name": "Lying Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Other",
@@ -4920,7 +4928,7 @@
     "image": "Triceps/Lying_Triceps_Extension"
   },
   {
-    "id": 616,
+    "id": 617,
     "name": "Parallel Bars Dips",
     "muscle": "Triceps",
     "equipment": "Bodyweight",
@@ -4928,7 +4936,7 @@
     "image": "Triceps/Parallel_Bars_Dips"
   },
   {
-    "id": 617,
+    "id": 618,
     "name": "Plate Loaded Dip Machine",
     "muscle": "Triceps",
     "equipment": "Machine",
@@ -4936,7 +4944,7 @@
     "image": "Triceps/Plate_Loaded_Dip_Machine"
   },
   {
-    "id": 618,
+    "id": 619,
     "name": "Reverse Grip Triceps Pushdown",
     "muscle": "Triceps",
     "equipment": "Other",
@@ -4944,7 +4952,7 @@
     "image": "Triceps/Reverse_Grip_Triceps_Pushdown"
   },
   {
-    "id": 619,
+    "id": 620,
     "name": "Rope Attachment Single Arm Pushdown",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4952,7 +4960,7 @@
     "image": "Triceps/Rope_Attachment_Single_Arm_Pushdown"
   },
   {
-    "id": 620,
+    "id": 621,
     "name": "Seated Dumbbell Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Dumbbell",
@@ -4960,7 +4968,7 @@
     "image": "Triceps/Seated_Dumbell_Triceps_Extension"
   },
   {
-    "id": 621,
+    "id": 622,
     "name": "Single Arm Cable Overhead Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Cable",
@@ -4968,7 +4976,7 @@
     "image": "Triceps/Single_Arm_Cable_Overhead_Triceps_Extension"
   },
   {
-    "id": 622,
+    "id": 623,
     "name": "Smith Close Grip Bench Press",
     "muscle": "Triceps",
     "equipment": "Machine",
@@ -4976,7 +4984,7 @@
     "image": "Triceps/Smith_Close_Grip_Bench_Press"
   },
   {
-    "id": 623,
+    "id": 624,
     "name": "Smith Machine Incline Tricep Extension",
     "muscle": "Triceps",
     "equipment": "Machine",
@@ -4984,7 +4992,7 @@
     "image": "Triceps/Smith_Machine_Incline_Tricep_Extension"
   },
   {
-    "id": 624,
+    "id": 625,
     "name": "Standing One Arm Extension",
     "muscle": "Triceps",
     "equipment": "Other",
@@ -4992,7 +5000,7 @@
     "image": "Triceps/Standing_One_Arm_Extension"
   },
   {
-    "id": 625,
+    "id": 626,
     "name": "Suspension Triceps Extension",
     "muscle": "Triceps",
     "equipment": "Bodyweight",
@@ -5000,7 +5008,7 @@
     "image": "Triceps/Suspension_Triceps_Extension"
   },
   {
-    "id": 626,
+    "id": 627,
     "name": "Tricep Pushdown",
     "muscle": "Triceps",
     "equipment": "Other",
@@ -5008,15 +5016,15 @@
     "image": "Triceps/Tricep_Pushdown"
   },
   {
-    "id": 627,
+    "id": 628,
     "name": "Triceps Dip",
     "muscle": "Triceps",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Triceps/Triceps_Dip"
   },
   {
-    "id": 628,
+    "id": 629,
     "name": "Triceps Extension Machine",
     "muscle": "Triceps",
     "equipment": "Machine",
@@ -5024,7 +5032,7 @@
     "image": "Triceps/Triceps_Extension_Machine"
   },
   {
-    "id": 629,
+    "id": 630,
     "name": "Triceps Press",
     "muscle": "Triceps",
     "equipment": "Other",
@@ -5032,7 +5040,7 @@
     "image": "Triceps/Triceps_Press"
   },
   {
-    "id": 630,
+    "id": 631,
     "name": "Weighted Triceps Dip",
     "muscle": "Triceps",
     "equipment": "Bodyweight",
