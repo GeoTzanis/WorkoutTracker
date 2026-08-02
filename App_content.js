@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import EXERCISE_IMAGES from './exerciseImages';
 
+
 const MUSCLE_GROUPS = ["Chest","Back","Shoulders","Biceps","Triceps","Quads","Hamstrings","Calves","Forearms","Abs","Glutes"];
 const MUSCLE_COLORS = {
   'Chest':'#F97316','Back':'#10B981','Shoulders':'#EAB308','Biceps':'#EF4444','Triceps':'#6366F1',
@@ -178,17 +179,18 @@ function ExPickerModal({ visible, exercises, onClose, onPick, C, recentExIds=[] 
   );
 }
 
+const EQUIPMENT_OPTIONS = ["Barbell","Dumbbell","Single Dumbbell","Cable","Machine","Bodyweight","Other"];
+
 function AddExModal({ visible, muscle, nextExId, onClose, onSave, C }) {
   const [name, setName] = useState('');
   const [equipment, setEquipment] = useState('Barbell');
   const [isBodyweight, setIsBodyweight] = useState(false);
   useEffect(() => { if (!visible) { setName(''); setEquipment('Barbell'); setIsBodyweight(false); } }, [visible]);
-  if (!visible) return null;
   const styles = makeStyles(C);
   return (
-    <TouchableOpacity style={styles.modalBackdrop} activeOpacity={1} onPress={onClose}>
-      <KeyboardAvoidingView behavior={Platform.OS==='ios'?'padding':'height'} style={{width:'100%'}}>
-        <TouchableOpacity style={[styles.modal,{maxHeight:'90%'}]} activeOpacity={1} onPress={()=>{}}>
+    <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
+      <KeyboardAvoidingView behavior={Platform.OS==='ios'?'padding':'height'} style={{flex:1,justifyContent:'flex-end',backgroundColor:'rgba(0,0,0,0.6)'}}>
+        <View style={[styles.modal,{maxHeight:'90%'}]}>
           <View style={styles.rowBetween}>
             <Text style={styles.sectionTitle}>Add exercise — {muscle}</Text>
             <TouchableOpacity onPress={onClose}><Text style={{fontSize:20,color:C.text}}>X</Text></TouchableOpacity>
@@ -213,9 +215,9 @@ function AddExModal({ visible, muscle, nextExId, onClose, onSave, C }) {
           <TouchableOpacity style={[styles.primaryBtn,{alignItems:'center'}]} onPress={()=>{if(!name.trim())return;onSave({id:nextExId,name:name.trim(),muscle,equipment,isBodyweight});setName('');setEquipment('Barbell');setIsBodyweight(false);}}>
             <Text style={styles.primaryBtnText}>Save exercise</Text>
           </TouchableOpacity>
-        </TouchableOpacity>
+        </View>
       </KeyboardAvoidingView>
-    </TouchableOpacity>
+    </Modal>
   );
 }
 
@@ -239,8 +241,6 @@ function EditWorkoutModal({ visible, workout, exercises, onClose, onSave, onAddE
           <TextInput style={styles.searchInput} value={local.name} onChangeText={t=>setLocal({...local,name:t})} placeholder="Workout name" placeholderTextColor={C.textMuted}/>
           <Text style={[styles.cardSub,{marginBottom:4}]}>Date (YYYY-MM-DD)</Text>
           <TextInput style={styles.searchInput} value={local.date} onChangeText={t=>setLocal({...local,date:t})} placeholder="2026-06-29" placeholderTextColor={C.textMuted}/>
-          <Text style={[styles.cardSub,{marginBottom:4}]}>Gym</Text>
-          <TextInput style={styles.searchInput} value={local.gym||''} onChangeText={t=>setLocal({...local,gym:t})} placeholder="Gym name" placeholderTextColor={C.textMuted}/>
           <Text style={[styles.cardSub,{marginTop:4,marginBottom:8}]}>Exercises</Text>
           {local.exercises.map((ex,eIdx)=>{
             const info=getEx(ex.exId);
@@ -840,6 +840,8 @@ export default function App() {
   const [measurements, setMeasurements] = useState([]);
   const [showMeasureModal, setShowMeasureModal] = useState(false);
   const [measureDraft, setMeasureDraft] = useState({date:'',chest:'',waist:'',hips:'',arms:'',thighs:'',weight:''});
+  const [historyExId, setHistoryExId] = useState(null);
+  const [selectedCalendarMonth, setSelectedCalendarMonth] = useState(0);
   const [darkMode, setDarkMode] = useState(true);
   const C = darkMode ? DARK : LIGHT;
 
@@ -864,6 +866,7 @@ export default function App() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingWorkout, setEditingWorkout] = useState(null);
   const [showWorkoutMenu, setShowWorkoutMenu] = useState(null);
+  const [workoutDetailId, setWorkoutDetailId] = useState(null);
   const [showAddExModal, setShowAddExModal] = useState(false);
   const [addExMuscle, setAddExMuscle] = useState(null);
   const [libSearch, setLibSearch] = useState('');
@@ -1109,13 +1112,30 @@ export default function App() {
   const addSet=(eIdx)=>{
     const u=JSON.parse(JSON.stringify(activeWorkout)); const sets=u.exercises[eIdx].sets; const prev=sets[sets.length-1]||null;
     const newSet={reps:0,weight:0,warmup:false,unilateral:false,completed:false,hasPartials:false,partialReps:0,hasMyoReps:false,myoSets:0,myoReps:0,hasDropSets:false,dropSets:[]};
-    if(prev){if(prev.unilateral){newSet.unilateral=true;newSet.weightL=prev.weightL;newSet.repsL=prev.repsL;newSet.weightR=prev.weightR;newSet.repsR=prev.repsR;}else{newSet.weight=prev.weight;newSet.reps=prev.reps;}}
+    if(prev){
+      if(prev.unilateral){newSet.unilateral=true;newSet.weightL=prev.weightL;newSet.repsL=prev.repsL;newSet.weightR=prev.weightR;newSet.repsR=prev.repsR;}
+      else{newSet.weight=prev.weight;newSet.reps=prev.reps;}
+    } else {
+      // Auto-fill from last session for first set
+      const lastSets=getLastSession(u.exercises[eIdx].exId);
+      if(lastSets&&lastSets[0]){
+        const ls=lastSets[0];
+        if(ls.unilateral){newSet.unilateral=true;newSet.weightL=ls.weightL;newSet.repsL=ls.repsL;newSet.weightR=ls.weightR;newSet.repsR=ls.repsR;}
+        else{newSet.weight=ls.weight;newSet.reps=ls.reps;}
+      }
+    }
     sets.push(newSet); setActiveWorkout(u);
   };
   const upd=(fn)=>{const u=JSON.parse(JSON.stringify(activeWorkout));fn(u);setActiveWorkout(u);};
   const toggleWarmup=(eIdx,sIdx)=>upd(u=>{u.exercises[eIdx].sets[sIdx].warmup=!u.exercises[eIdx].sets[sIdx].warmup;});
   const toggleCompleted=(eIdx,sIdx)=>upd(u=>{u.exercises[eIdx].sets[sIdx].completed=!u.exercises[eIdx].sets[sIdx].completed;});
   const togglePartials=(eIdx,sIdx)=>upd(u=>{u.exercises[eIdx].sets[sIdx].hasPartials=!u.exercises[eIdx].sets[sIdx].hasPartials;});
+  const togglePartialsOnly=(eIdx,sIdx)=>upd(u=>{
+    const set=u.exercises[eIdx].sets[sIdx];
+    set.partialsOnly=!set.partialsOnly;
+    if(set.partialsOnly){set.hasPartials=true;set.reps=0;}
+    else{set.hasPartials=false;}
+  });
   const updatePartialReps=(eIdx,sIdx,val)=>upd(u=>{u.exercises[eIdx].sets[sIdx].partialReps=parseInt(val)||0;});
   const toggleMyoReps=(eIdx,sIdx)=>upd(u=>{u.exercises[eIdx].sets[sIdx].hasMyoReps=!u.exercises[eIdx].sets[sIdx].hasMyoReps;});
   const updateMyoReps=(eIdx,sIdx,field,val)=>upd(u=>{u.exercises[eIdx].sets[sIdx][field]=parseInt(val)||0;});
@@ -1136,7 +1156,12 @@ export default function App() {
   const pickExercise=(exId)=>{
     if(swapExEIdx!==null){upd(u=>{u.exercises[swapExEIdx].exId=exId;});setSwapExEIdx(null);setShowExPicker(false);return;}
     const u=JSON.parse(JSON.stringify(activeWorkout)); const newIdx=u.exercises.length;
-    u.exercises.push({exId,sets:[{reps:0,weight:0,warmup:false,unilateral:false,completed:false}]});
+    const lastSets=getLastSession(exId);
+    const firstSet = lastSets&&lastSets[0]
+      ? {reps:lastSets[0].reps,weight:lastSets[0].weight,warmup:false,unilateral:lastSets[0].unilateral||false,
+         weightL:lastSets[0].weightL||0,weightR:lastSets[0].weightR||0,repsL:lastSets[0].repsL||0,repsR:lastSets[0].repsR||0,completed:false}
+      : {reps:0,weight:0,warmup:false,unilateral:false,completed:false};
+    u.exercises.push({exId,sets:[firstSet]});
     setActiveWorkout(u); setCollapsedEx(prev=>({...prev,[newIdx]:true})); setShowExPicker(false);
   };
   const deleteExerciseFromWorkout=(eIdx)=>upd(u=>{u.exercises.splice(eIdx,1);setExerciseMenuOpen(null);});
@@ -1179,9 +1204,17 @@ export default function App() {
     }) : [];
   const maxVol = Math.max(...progressData.map(d=>d.vol),1);
 
+  const calc1RM = (weight, reps) => weight * (1 + reps / 30);
   const getPR = (exId) => {
-    const allWts = workouts.flatMap(w=>{const ex=w.exercises.find(e=>e.exId===exId);return ex?ex.sets.filter(s=>s.completed&&!s.warmup).map(s=>s.unilateral?Math.max(parseDecimal(s.weightL),parseDecimal(s.weightR)):parseDecimal(s.weight)):[];});
-    return allWts.length>0?Math.max(...allWts):null;
+    const all1RMs = workouts.flatMap(w=>{
+      const ex=w.exercises.find(e=>e.exId===exId);
+      return ex?ex.sets.filter(s=>s.completed&&!s.warmup).map(s=>{
+        const wt=s.unilateral?Math.max(parseDecimal(s.weightL),parseDecimal(s.weightR)):parseDecimal(s.weight);
+        const reps=s.unilateral?Math.max(parseDecimal(s.repsL),parseDecimal(s.repsR)):parseDecimal(s.reps);
+        return calc1RM(wt,reps);
+      }):[];
+    });
+    return all1RMs.length>0?Math.max(...all1RMs):null;
   };
 
   const getWeekStart = () => {const now=new Date();const d=now.getDay();const mon=new Date(now.getFullYear(),now.getMonth(),now.getDate()-(d===0?6:d-1));mon.setHours(0,0,0,0);return mon;};
@@ -1225,7 +1258,7 @@ export default function App() {
       </View>
       {recent.length===0?<View style={styles.emptyState}><Text style={styles.emptyText}>No workouts yet.{'\n'}Start your first one!</Text></View>:
         recent.map(w=>(
-          <TouchableOpacity key={w.id} style={styles.card} activeOpacity={0.7} onPress={()=>{setEditingWorkout(w);setShowEditModal(true);}}>
+          <TouchableOpacity key={w.id} style={styles.card} activeOpacity={0.7} onPress={()=>setWorkoutDetailId(w.id)}>
             <View style={styles.rowBetween}>
               <View style={{flex:1}}>
                 <Text style={styles.cardTitle}>{w.name}</Text>
@@ -1249,7 +1282,7 @@ export default function App() {
           </TouchableOpacity>
         ))
       }
-      <View style={{height:20}}/>
+      <View style={{height:100}}/>
     </ScrollView>
   );
 
@@ -1341,11 +1374,32 @@ export default function App() {
         </View>
         <View style={[styles.card,styles.rowBetween]}>
           <View><Text style={styles.statLabel}>Duration</Text><Text style={[styles.statVal,{fontSize:32}]}>{fmtTimer()}</Text></View>
+          <View style={{alignItems:'center'}}>
+            <Text style={styles.statLabel}>Volume</Text>
+            <Text style={[styles.statVal,{fontSize:24}]}>{activeWorkout.exercises.reduce((s,ex)=>s+exerciseVolume(ex),0).toLocaleString()}</Text>
+            <Text style={styles.statLabel}>{unit}</Text>
+          </View>
           <View style={styles.row}>
             <TouchableOpacity style={styles.ghostBtn} onPress={()=>setTimerRunning(r=>!r)}><Text style={styles.ghostBtnText}>{timerRunning?'⏸':'▶'}</Text></TouchableOpacity>
             <TouchableOpacity style={[styles.ghostBtn,{marginLeft:8,borderColor:C.danger}]} onPress={()=>setShowDiscardConfirm(true)}><Text style={[styles.ghostBtnText,{color:C.danger}]}>✕</Text></TouchableOpacity>
           </View>
         </View>
+        {workouts.length>0&&(
+          <View style={{marginBottom:8}}>
+            <Text style={[styles.cardSub,{marginBottom:6,color:C.textMuted}]}>Recent workouts</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {[...workouts].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,10).map(w=>(
+                <TouchableOpacity key={w.id} onPress={()=>setWorkoutDetailId(w.id)}
+                  style={{backgroundColor:C.card,borderRadius:10,padding:10,marginRight:8,minWidth:140,borderWidth:0.5,borderColor:C.border}}>
+                  <Text style={[styles.cardTitle,{fontSize:13}]} numberOfLines={1}>{w.name}</Text>
+                  <Text style={[styles.cardSub,{fontSize:11,color:C.accent}]}>{fmtDay(w.date)}</Text>
+                  <Text style={[styles.cardSub,{fontSize:11}]}>{fmtDate(w.date)}</Text>
+                  <Text style={[styles.cardSub,{fontSize:11}]}>{totalSets(w)} sets · {totalVol(w).toLocaleString()} {unit}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        )}
         {activeWorkout.exercises.map((ex,eIdx)=>{
           const info=getEx(ex.exId); const color=MUSCLE_COLORS[info?.muscle]||C.accent;
           const lastSets=getLastSession(ex.exId); const isCollapsed=!!collapsedEx[eIdx];
@@ -1388,6 +1442,8 @@ export default function App() {
                   <TouchableOpacity style={styles.dropdownItem} onPress={()=>{setMachinePickerEIdx(eIdx);setShowMachinePicker(true);setExerciseMenuOpen(null);}}><Text style={styles.dropdownItemText}>⚙️  Machine</Text></TouchableOpacity>
                   <View style={styles.dropdownDivider}/>
                   <TouchableOpacity style={styles.dropdownItem} onPress={()=>openNotesEditor(eIdx)}><Text style={styles.dropdownItemText}>📝  Notes</Text></TouchableOpacity>
+                  <View style={styles.dropdownDivider}/>
+                  <TouchableOpacity style={styles.dropdownItem} onPress={()=>{setHistoryExId(ex.exId);setExerciseMenuOpen(null);}}><Text style={styles.dropdownItemText}>📊  History</Text></TouchableOpacity>
                   <View style={styles.dropdownDivider}/>
                   <TouchableOpacity style={styles.dropdownItem} onPress={()=>deleteExerciseFromWorkout(eIdx)}><Text style={[styles.dropdownItemText,{color:C.danger}]}>🗑  Delete exercise</Text></TouchableOpacity>
                 </View>
@@ -1445,10 +1501,16 @@ export default function App() {
                     <Text style={[styles.setVolumeText,{textAlign:'right',marginBottom:2}]}>{setVolume(set,ex).toLocaleString()} {unit}</Text>
                     <View style={styles.row}>
                       <TouchableOpacity onPress={()=>setExpandedSets(prev=>({...prev,[setKey]:!prev[setKey]}))} hitSlop={{top:14,bottom:14,left:14,right:14}} style={{width:24,paddingVertical:6}}>
-                        <Text style={[styles.cardSub,{color:set.warmup?'#EAB308':C.textSecondary}]}>{sIdx+1}</Text>
+                        <Text style={[styles.cardSub,{color:set.warmup?'#EAB308':set.partialsOnly?'#22D3EE':C.textSecondary}]}>{sIdx+1}</Text>
                       </TouchableOpacity>
                       <TextInput style={[styles.setInput,{flex:1,marginRight:6},set.warmup&&styles.setInputWarmup]} keyboardType="decimal-pad" selectTextOnFocus value={String(set.weight)} onChangeText={v=>updateSet(eIdx,sIdx,'weight',v)} placeholder={lastSet?String(lastSet.weight):"0"} placeholderTextColor={C.textMuted}/>
-                      <TextInput style={[styles.setInput,{flex:1,marginRight:6},set.warmup&&styles.setInputWarmup]} keyboardType="decimal-pad" selectTextOnFocus value={String(set.reps)} onChangeText={v=>updateSet(eIdx,sIdx,'reps',v)} placeholder={lastSet?String(lastSet.reps):"0"} placeholderTextColor={C.textMuted}/>
+                      {set.partialsOnly?(
+                        <View style={[styles.setInput,{flex:1,marginRight:6,justifyContent:'center',alignItems:'center',backgroundColor:C.bg}]}>
+                          <Text style={{color:'#22D3EE',fontSize:12}}>Partials</Text>
+                        </View>
+                      ):(
+                        <TextInput style={[styles.setInput,{flex:1,marginRight:6},set.warmup&&styles.setInputWarmup]} keyboardType="decimal-pad" selectTextOnFocus value={String(set.reps)} onChangeText={v=>updateSet(eIdx,sIdx,'reps',v)} placeholder={lastSet?String(lastSet.reps):"0"} placeholderTextColor={C.textMuted}/>
+                      )}
                       <TouchableOpacity onPress={()=>toggleCompleted(eIdx,sIdx)} style={[styles.checkBadge,set.completed&&styles.checkBadgeActive]}><Text style={[styles.checkBadgeText,set.completed&&styles.checkBadgeTextActive]}>✓</Text></TouchableOpacity>
                       <TouchableOpacity onPress={()=>removeSet(eIdx,sIdx)} style={{width:28,alignItems:'center'}}><Text style={{color:C.textMuted}}>X</Text></TouchableOpacity>
                     </View>
@@ -1458,6 +1520,7 @@ export default function App() {
                           <TouchableOpacity onPress={()=>toggleWarmup(eIdx,sIdx)} style={[styles.wordBadge,styles.warmupBadgeIdle,set.warmup&&styles.warmupBadgeActive]}><Text style={[styles.wordBadgeText,styles.warmupBadgeTextIdle,set.warmup&&styles.warmupBadgeTextActive]}>Warm-Up</Text></TouchableOpacity>
                           <TouchableOpacity onPress={()=>toggleUnilateral(eIdx,sIdx)} style={[styles.wordBadge,styles.unilateralBadgeBorder]}><Text style={[styles.wordBadgeText,styles.unilateralBadgeText]}>Unilateral</Text></TouchableOpacity>
                           <TouchableOpacity onPress={()=>togglePartials(eIdx,sIdx)} style={[styles.wordBadge,styles.partialsBadgeIdle,set.hasPartials&&styles.partialsBadgeActive]}><Text style={[styles.wordBadgeText,styles.partialsBadgeTextIdle,set.hasPartials&&styles.partialsBadgeTextActive]}>Partials</Text></TouchableOpacity>
+                          <TouchableOpacity onPress={()=>togglePartialsOnly(eIdx,sIdx)} style={[styles.wordBadge,styles.partialsBadgeIdle,set.partialsOnly&&styles.partialsBadgeActive]}><Text style={[styles.wordBadgeText,styles.partialsBadgeTextIdle,set.partialsOnly&&styles.partialsBadgeTextActive]}>Partials Only</Text></TouchableOpacity>
                           <TouchableOpacity onPress={()=>toggleMyoReps(eIdx,sIdx)} style={[styles.wordBadge,styles.myoBadgeIdle,set.hasMyoReps&&styles.myoBadgeActive]}><Text style={[styles.wordBadgeText,styles.myoBadgeTextIdle,set.hasMyoReps&&styles.myoBadgeTextActive]}>Myo-Reps</Text></TouchableOpacity>
                           <TouchableOpacity onPress={()=>toggleDropSets(eIdx,sIdx)} style={[styles.wordBadge,styles.dropBadgeIdle,set.hasDropSets&&styles.dropBadgeActive]}><Text style={[styles.wordBadgeText,styles.dropBadgeTextIdle,set.hasDropSets&&styles.dropBadgeTextActive]}>Drop Sets</Text></TouchableOpacity>
                         </ScrollView>
@@ -1476,8 +1539,16 @@ export default function App() {
                         </View>}
                       </View>
                     )}
-                    {lastSet&&<Text style={styles.lastSessionHint}>Last: {lastSet.weight}{unit} × {lastSet.reps}</Text>}
-                    {set.completed&&!set.warmup&&(()=>{const pr=getPR(ex.exId);const w=parseDecimal(set.weight);return pr&&w>0&&w>=pr?<Text style={{fontSize:12,color:'#FFD700',marginLeft:28,marginTop:2}}>🏆 New PR!</Text>:null;})()}
+                    {lastSet&&<Text style={styles.lastSessionHint}>
+                      Last: {lastSet.weight>0?`${lastSet.weight}${unit} × `:''}{lastSet.reps} reps
+                    </Text>}
+                    {set.completed&&!set.warmup&&(()=>{
+                      const pr=getPR(ex.exId);
+                      const w=parseDecimal(set.weight);
+                      const r=parseDecimal(set.reps);
+                      const current1RM=calc1RM(w,r);
+                      return pr&&w>0&&r>0&&current1RM>pr?<Text style={{fontSize:12,color:'#FFD700',marginLeft:28,marginTop:2}}>🏆 New PR!</Text>:null;
+                    })()}
                   </View>
                 );
               })}
@@ -1513,8 +1584,7 @@ export default function App() {
               <View style={styles.exGrid}>
                 {muscleExercises.map(e=>(
                   <TouchableOpacity key={e.id} style={styles.exGridCard}
-                    onPress={()=>setPreviewExercise(e)}
-                    onLongPress={()=>deleteExercise(e.id)}>
+                    onPress={()=>setPreviewExercise(e)}>
                     <View style={styles.exGridImgWrap}>
                       {e.image && EXERCISE_IMAGES[e.image] ? (
                         <Image source={EXERCISE_IMAGES[e.image]} style={{width:90,height:90,borderRadius:10}} resizeMode="cover"/>
@@ -1536,17 +1606,31 @@ export default function App() {
     return (
       <ScrollView style={styles.page}>
         <Text style={styles.pageTitle}>Exercise Library</Text>
-        <TextInput style={styles.searchInput} value={libSearch} onChangeText={setLibSearch} placeholder="Search muscle groups..." placeholderTextColor={C.textMuted}/>
-        {MUSCLE_GROUPS.filter(m=>m.toLowerCase().includes(libSearch.toLowerCase())).map(muscle=>{
-          const count=exercises.filter(e=>e.muscle===muscle).length;
-          return (
-            <TouchableOpacity key={muscle} style={styles.muscleGroupHeader} onPress={()=>{setOpenMuscle(muscle);setLibSearch('');}}>
-              <View style={styles.muscleIconWrap}><Image source={MUSCLE_IMAGES[muscle]} style={{width:120,height:120}} resizeMode="contain"/></View>
-              <View style={{flex:1}}><Text style={styles.muscleGroupName}>{muscle}</Text><Text style={styles.cardSub}>{count} exercise{count!==1?'s':''}</Text></View>
-              <Text style={{color:C.textMuted,fontSize:18}}>›</Text>
-            </TouchableOpacity>
-          );
-        })}
+        <TextInput style={styles.searchInput} value={libSearch} onChangeText={setLibSearch} placeholder="Search exercises..." placeholderTextColor={C.textMuted}/>
+        {libSearch.length>0?(
+          <View style={{flexDirection:'row',flexWrap:'wrap',gap:8,padding:4}}>
+            {exercises.filter(e=>e.name.toLowerCase().includes(libSearch.toLowerCase())).map(e=>(
+              <TouchableOpacity key={e.id} style={styles.exGridCard} onPress={()=>setPreviewExercise(e)}>
+                <View style={styles.exGridImgWrap}>
+                  {e.image&&EXERCISE_IMAGES[e.image]?<Image source={EXERCISE_IMAGES[e.image]} style={{width:90,height:90,borderRadius:10}} resizeMode="cover"/>:<Text style={{fontSize:32}}>{e.isBodyweight?'🏃':'🏋️'}</Text>}
+                </View>
+                <Text style={styles.exGridName} numberOfLines={2}>{e.name}</Text>
+                <Text style={styles.exGridSub}>{e.muscle}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        ):(
+          MUSCLE_GROUPS.map(muscle=>{
+            const count=exercises.filter(e=>e.muscle===muscle).length;
+            return (
+              <TouchableOpacity key={muscle} style={styles.muscleGroupHeader} onPress={()=>{setOpenMuscle(muscle);setLibSearch('');}}>
+                <View style={styles.muscleIconWrap}><Image source={MUSCLE_IMAGES[muscle]} style={{width:120,height:120}} resizeMode="contain"/></View>
+                <View style={{flex:1}}><Text style={styles.muscleGroupName}>{muscle}</Text><Text style={styles.cardSub}>{count} exercise{count!==1?'s':''}</Text></View>
+                <Text style={{color:C.textMuted,fontSize:18}}>›</Text>
+              </TouchableOpacity>
+            );
+          })
+        )}
         <View style={{height:20}}/>
       </ScrollView>
     );
@@ -1556,7 +1640,7 @@ export default function App() {
     <ScrollView style={styles.page}>
       <Text style={styles.pageTitle}>Progress</Text>
       <View style={[styles.row,{marginBottom:14,gap:8}]}>
-        {[['exercise','Exercise'],['weekly','Weekly Vol'],['measurements','Body']].map(([id,label])=>(
+        {[['exercise','Exercise'],['weekly','Weekly Vol'],['calendar','Calendar'],['measurements','Body']].map(([id,label])=>(
           <TouchableOpacity key={id} onPress={()=>setProgressTab(id)} style={[styles.filterTag,progressTab===id&&styles.filterTagActive,{flex:1,justifyContent:'center',alignItems:'center'}]}>
             <Text style={[styles.filterTagText,progressTab===id&&styles.filterTagTextActive]}>{label}</Text>
           </TouchableOpacity>
@@ -1640,6 +1724,85 @@ export default function App() {
         </View>
       )}
 
+      {progressTab==='calendar'&&(()=>{
+        const workoutDates = new Set(workouts.map(w=>w.date));
+        const today = new Date();
+        // Get all months from first workout to today
+        const allMonths = [];
+        if(workouts.length>0){
+          const earliest = new Date(workouts.reduce((min,w)=>w.date<min?w.date:min, workouts[0].date)+'T00:00:00');
+          let cur = new Date(earliest.getFullYear(), earliest.getMonth(), 1);
+          const end = new Date(today.getFullYear(), today.getMonth(), 1);
+          while(cur<=end){
+            allMonths.push({year:cur.getFullYear(), month:cur.getMonth()});
+            cur.setMonth(cur.getMonth()+1);
+          }
+        } else {
+          allMonths.push({year:today.getFullYear(), month:today.getMonth()});
+        }
+        allMonths.reverse(); // newest first
+        if(allMonths.length===0) return <Text style={styles.emptyText}>No workouts yet.</Text>;
+        const safeIdx = Math.min(selectedCalendarMonth, allMonths.length-1);
+        const [selectedMonth, setSelectedMonth] = [safeIdx, setSelectedCalendarMonth];
+        const DAYS = ['M','T','W','T','F','S','S'];
+        const {year,month} = allMonths[selectedMonth];
+        const monthName = new Date(year,month,1).toLocaleDateString('en-GB',{month:'long',year:'numeric'});
+        const firstDay = new Date(year,month,1).getDay();
+        const offset = firstDay===0?6:firstDay-1;
+        const daysInMonth = new Date(year,month+1,0).getDate();
+        const cells = [];
+        for(let i=0;i<offset;i++) cells.push(null);
+        for(let d=1;d<=daysInMonth;d++) cells.push(d);
+        const workoutCount = Array.from(workoutDates).filter(date=>{
+          const d=new Date(date+'T00:00:00');
+          return d.getFullYear()===year&&d.getMonth()===month;
+        }).length;
+        const totalWorkouts = workoutDates.size;
+        return (
+          <View>
+            <View style={[styles.card,{marginBottom:12}]}>
+              <View style={[styles.statRow,{marginBottom:0}]}>
+                <View style={styles.statCard}><Text style={styles.statVal}>{totalWorkouts}</Text><Text style={styles.statLabel}>Total workouts</Text></View>
+                <View style={styles.statCard}><Text style={styles.statVal}>{allMonths.length}</Text><Text style={styles.statLabel}>Active months</Text></View>
+              </View>
+            </View>
+            <View style={[styles.card,{marginBottom:12}]}>
+              <View style={[styles.rowBetween,{marginBottom:12}]}>
+                <TouchableOpacity onPress={()=>setSelectedMonth(m=>Math.min(allMonths.length-1,m+1))} disabled={selectedMonth>=allMonths.length-1} style={{padding:8,opacity:selectedMonth>=allMonths.length-1?0.3:1}}>
+                  <Text style={{color:C.accent,fontSize:20}}>‹</Text>
+                </TouchableOpacity>
+                <View style={{alignItems:'center'}}>
+                  <Text style={styles.cardTitle}>{monthName}</Text>
+                  <Text style={[styles.cardSub,{color:C.accent}]}>{workoutCount} workout{workoutCount!==1?'s':''}</Text>
+                </View>
+                <TouchableOpacity onPress={()=>setSelectedMonth(m=>Math.max(0,m-1))} disabled={selectedMonth<=0} style={{padding:8,opacity:selectedMonth<=0?0.3:1}}>
+                  <Text style={{color:C.accent,fontSize:20}}>›</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{flexDirection:'row',marginBottom:6}}>
+                {DAYS.map((d,i)=><Text key={i} style={[styles.cardSub,{flex:1,textAlign:'center',fontSize:11,fontWeight:'600'}]}>{d}</Text>)}
+              </View>
+              <View style={{flexDirection:'row',flexWrap:'wrap'}}>
+                {cells.map((day,i)=>{
+                  if(!day) return <View key={i} style={{width:'14.28%',aspectRatio:1}}/>;
+                  const dateStr=`${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+                  const hasWorkout=workoutDates.has(dateStr);
+                  const isToday=day===today.getDate()&&month===today.getMonth()&&year===today.getFullYear();
+                  return (
+                    <View key={i} style={{width:'14.28%',aspectRatio:1,alignItems:'center',justifyContent:'center'}}>
+                      <View style={{width:32,height:32,borderRadius:16,alignItems:'center',justifyContent:'center',
+                        backgroundColor:hasWorkout?C.accent:isToday?C.card:'transparent',
+                        borderWidth:isToday&&!hasWorkout?1:0,borderColor:C.accent}}>
+                        <Text style={{fontSize:12,color:hasWorkout?C.white:isToday?C.accent:C.textMuted,fontWeight:hasWorkout||isToday?'700':'400'}}>{day}</Text>
+                      </View>
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+          </View>
+        );
+      })()}
       {progressTab==='measurements'&&(
         <>
           <TouchableOpacity style={[styles.primaryBtn,{alignItems:'center',marginBottom:14}]} onPress={()=>setShowMeasureModal(true)}>
@@ -1715,7 +1878,7 @@ export default function App() {
           );
         })
       }
-      <View style={{height:20}}/>
+      <View style={{height:100}}/>
     </ScrollView>
   );
 
@@ -1756,14 +1919,68 @@ export default function App() {
       <ExPickerModal visible={showExPicker} exercises={exercises} onClose={()=>{setShowExPicker(false);setSwapExEIdx(null);}} onPick={pickExercise} C={C} recentExIds={recentExIds}/>
       <ExPickerModal visible={showExPickerEdit} exercises={exercises} C={C}
         onClose={()=>setShowExPickerEdit(false)}
-        onPick={(exId)=>{setEditingWorkout(prev=>{if(!prev)return prev;const u=JSON.parse(JSON.stringify(prev));u.exercises.push({exId,sets:[{reps:0,weight:0,warmup:false,unilateral:false,completed:false,hasPartials:false,partialReps:0,hasMyoReps:false,myoSets:0,myoReps:0}]});return u;});setShowExPickerEdit(false);}}/>
+        onPick={(exId)=>{setEditingWorkout(prev=>{if(!prev)return prev;const u=JSON.parse(JSON.stringify(prev));u.exercises.push({exId,sets:[{reps:0,weight:0,warmup:false,unilateral:false,completed:false,hasPartials:false,partialReps:0,hasMyoReps:false,myoSets:0,myoReps:0}]});return u;});setShowExPickerEdit(false);setTimeout(()=>setShowEditModal(true),300);}}/>
       <AddExModal visible={showAddExModal} muscle={addExMuscle} nextExId={nextExId} onClose={()=>setShowAddExModal(false)} onSave={saveNewExercise} C={C}/>
       <EditWorkoutModal visible={showEditModal} workout={editingWorkout} exercises={exercises} C={C}
-        onClose={()=>setShowEditModal(false)} onAddExercise={()=>setShowExPickerEdit(true)}
+        onClose={()=>setShowEditModal(false)} onAddExercise={()=>{setShowEditModal(false);setTimeout(()=>setShowExPickerEdit(true),300);}}
         onSave={(updated)=>{const nw=workouts.map(w=>w.id===updated.id?updated:w);setWorkouts(nw);AsyncStorage.setItem('workouts',JSON.stringify(nw));setShowEditModal(false);}}/>
       <MachinePickerModal visible={showMachinePicker} machines={machines} newMachineName={newMachineName} onChangeNewMachineName={setNewMachineName} onAddMachine={addMachine} onDeleteMachine={deleteMachine} onSelectMachine={(machineId)=>assignMachine(machinePickerEIdx,machineId)} onClose={()=>{setShowMachinePicker(false);setMachinePickerEIdx(null);}} C={C}/>
       <NotesModal visible={showNotesModal} draft={notesDraft} onChangeDraft={setNotesDraft} onSave={saveNotes} onClose={()=>{setShowNotesModal(false);setNotesEIdx(null);}} C={C}/>
       <ConfirmModal visible={showDiscardConfirm} title="Discard workout?" message="This will permanently delete everything logged in this session." confirmLabel="Discard" onConfirm={()=>{setActiveWorkout(null);setTimerRunning(false);setTimerSecs(0);setShowDiscardConfirm(false);}} onCancel={()=>setShowDiscardConfirm(false)} C={C}/>
+      {workoutDetailId&&(()=>{
+        const w=workouts.find(x=>x.id===workoutDetailId);
+        if(!w) return null;
+        return (
+          <Modal visible={true} transparent animationType="slide" onRequestClose={()=>setWorkoutDetailId(null)}>
+            <View style={{flex:1,backgroundColor:'rgba(0,0,0,0.6)',justifyContent:'flex-end'}}>
+              <View style={[styles.modal,{maxHeight:'92%'}]}>
+                <View style={styles.rowBetween}>
+                  <View style={{flex:1}}>
+                    <Text style={styles.sectionTitle}>{w.name}</Text>
+                    <Text style={[styles.cardSub,{color:C.accent}]}>{fmtDay(w.date)} · {fmtDate(w.date)}</Text>
+                  </View>
+                  <TouchableOpacity onPress={()=>setWorkoutDetailId(null)}><Text style={{fontSize:20,color:C.text}}>X</Text></TouchableOpacity>
+                </View>
+                <View style={[styles.statRow,{marginVertical:12}]}>
+                  <View style={styles.statCard}><Text style={styles.statVal}>{w.exercises.length}</Text><Text style={styles.statLabel}>Exercises</Text></View>
+                  <View style={styles.statCard}><Text style={styles.statVal}>{totalSets(w)}</Text><Text style={styles.statLabel}>Sets</Text></View>
+                  <View style={styles.statCard}><Text style={styles.statVal}>{totalVol(w).toLocaleString()}</Text><Text style={styles.statLabel}>{unit}</Text></View>
+                  <View style={styles.statCard}><Text style={styles.statVal}>{w.duration}</Text><Text style={styles.statLabel}>Min</Text></View>
+                </View>
+                <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}} contentContainerStyle={{paddingBottom:16}}>
+                  {w.exercises.map((ex,i)=>{
+                    const info=getEx(ex.exId);
+                    const completed=ex.sets.filter(s=>s.completed&&!s.warmup);
+                    if(completed.length===0) return null;
+                    return (
+                      <View key={i} style={{marginBottom:16}}>
+                        <View style={{flexDirection:'row',alignItems:'center',marginBottom:8}}>
+                          <View style={{width:44,height:44,borderRadius:8,backgroundColor:C.bg,alignItems:'center',justifyContent:'center',marginRight:10,overflow:'hidden'}}>
+                            {info?.image&&EXERCISE_IMAGES[info.image]?<Image source={EXERCISE_IMAGES[info.image]} style={{width:44,height:44}} resizeMode="cover"/>:<Text style={{fontSize:22}}>{info?.isBodyweight?'🏃':'🏋️'}</Text>}
+                          </View>
+                          <View style={{flex:1}}>
+                            <Text style={[styles.cardTitle,{fontSize:15}]}>{info?.name||'Unknown'}</Text>
+                            <Text style={[styles.cardSub,{fontSize:12}]}>{info?.muscle} · {info?.equipment}</Text>
+                          </View>
+                        </View>
+                        {completed.map((set,si)=>(
+                          <View key={si} style={{flexDirection:'row',paddingVertical:4,borderBottomWidth:0.5,borderBottomColor:C.border}}>
+                            <Text style={[styles.cardSub,{width:30}]}>{si+1}</Text>
+                            <Text style={[styles.cardSub,{flex:1}]}>{set.unilateral?`L: ${set.weightL}${unit} x ${set.repsL}  R: ${set.weightR}${unit} x ${set.repsR}`:set.partialsOnly?`${set.weight}${unit} x ${set.partialReps} partials`:`${set.weight}${unit} x ${set.reps} reps`}</Text>
+                          </View>
+                        ))}
+                      </View>
+                    );
+                  })}
+                </ScrollView>
+                <TouchableOpacity style={[styles.ghostBtn,{alignItems:'center',marginTop:12}]} onPress={()=>{setWorkoutDetailId(null);setEditingWorkout(w);setShowEditModal(true);}}>
+                  <Text style={{color:C.accent}}>Edit workout</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+        );
+      })()}
       <Modal visible={showFinishModal&&!!activeWorkout} transparent animationType="slide" onRequestClose={()=>{setShowFinishModal(false);setTimerRunning(true);}}>
         <KeyboardAvoidingView behavior={Platform.OS==='ios'?'padding':'height'} style={{flex:1,justifyContent:'flex-end',backgroundColor:'rgba(0,0,0,0.6)'}}>
           <View style={[styles.modal,{maxHeight:'90%',marginBottom:60}]}>
@@ -1857,6 +2074,63 @@ export default function App() {
         </TouchableOpacity>
       )}
       <ConfirmModal visible={showResetConfirm} title="Reset profile?" message="This will clear your name, gender, weight, height and unit settings. Your workouts and exercises will not be affected." confirmLabel="Reset" onConfirm={resetAllData} onCancel={()=>setShowResetConfirm(false)} C={C}/>
+      {historyExId&&(()=>{
+        const info=getEx(historyExId);
+        const history=[...workouts].sort((a,b)=>b.date.localeCompare(a.date))
+          .filter(w=>w.exercises.some(e=>e.exId===historyExId));
+        return (
+          <Modal visible={true} transparent animationType="slide" onRequestClose={()=>setHistoryExId(null)}>
+            <View style={{flex:1,backgroundColor:'rgba(0,0,0,0.6)',justifyContent:'flex-end'}}>
+              <View style={[styles.modal,{maxHeight:'88%'}]}>
+                <View style={[styles.rowBetween,{marginBottom:12}]}>
+                  <View style={{flex:1}}>
+                    <Text style={styles.sectionTitle}>{info?.name||'Exercise'}</Text>
+                    <Text style={styles.cardSub}>{history.length} session{history.length!==1?'s':''}</Text>
+                  </View>
+                  <TouchableOpacity onPress={()=>setHistoryExId(null)}><Text style={{fontSize:20,color:C.text}}>X</Text></TouchableOpacity>
+                </View>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                  {history.length===0?<Text style={styles.emptyText}>No history yet.</Text>:
+                    history.map((w,wi)=>{
+                      const ex=w.exercises.find(e=>e.exId===historyExId);
+                      const completed=ex.sets.filter(s=>s.completed&&!s.warmup);
+                      if(completed.length===0) return null;
+                      const maxWt=Math.max(...completed.map(s=>s.unilateral?Math.max(parseDecimal(s.weightL),parseDecimal(s.weightR)):parseDecimal(s.weight)));
+                      const totalV=completed.reduce((s,set)=>s+setVolume(set,ex),0);
+                      return (
+                        <View key={wi} style={[styles.card,{marginBottom:10}]}>
+                          <View style={[styles.rowBetween,{marginBottom:8}]}>
+                            <View>
+                              <Text style={[styles.cardTitle,{fontSize:14}]}>{w.name}</Text>
+                              <Text style={[styles.cardSub,{color:C.accent,fontSize:12}]}>{fmtDay(w.date)} · {fmtDate(w.date)}</Text>
+                            </View>
+                            <View style={{alignItems:'flex-end'}}>
+                              <Text style={styles.exVolumeText}>{totalV.toLocaleString()} {unit}</Text>
+                              <Text style={styles.cardSub}>Max: {maxWt} {unit}</Text>
+                            </View>
+                          </View>
+                          {completed.map((set,si)=>(
+                            <View key={si} style={{flexDirection:'row',paddingVertical:3,borderBottomWidth:0.5,borderBottomColor:C.border}}>
+                              <Text style={[styles.cardSub,{width:30,fontSize:12}]}>{si+1}</Text>
+                              <Text style={[styles.cardSub,{flex:1,fontSize:12}]}>
+                                {set.unilateral
+                                  ?`L: ${set.weightL}${unit}×${set.repsL}  R: ${set.weightR}${unit}×${set.repsR}`
+                                  :set.partialsOnly
+                                  ?`${set.weight} ${unit} × ${set.partialReps} partials`
+                                  :`${set.weight} ${unit} × ${set.reps} reps`}
+                              </Text>
+                            </View>
+                          ))}
+                        </View>
+                      );
+                    })
+                  }
+                </ScrollView>
+              </View>
+            </View>
+          </Modal>
+        );
+      })()}
       <Modal visible={!!previewExercise} transparent animationType="fade" onRequestClose={()=>setPreviewExercise(null)}>
         <TouchableOpacity style={{flex:1,backgroundColor:'rgba(0,0,0,0.92)',justifyContent:'center',alignItems:'center'}} activeOpacity={1} onPress={()=>setPreviewExercise(null)}>
           <TouchableOpacity activeOpacity={1} onPress={()=>{}} style={{width:'92%',borderRadius:16,overflow:'hidden',backgroundColor:C.card}}>
@@ -1875,7 +2149,7 @@ export default function App() {
               <Text style={{color:'white',fontSize:18}}>✕</Text>
             </TouchableOpacity>
           </TouchableOpacity>
-          <Text style={{color:'rgba(255,255,255,0.4)',marginTop:16,fontSize:13}}>Tap anywhere to close · Long press to delete</Text>
+          <Text style={{color:'rgba(255,255,255,0.4)',marginTop:16,fontSize:13}}>Tap anywhere to close</Text>
         </TouchableOpacity>
       </Modal>
       {!anyModalOpen&&page!=='settings'&&page!=='favbuilder'&&(
