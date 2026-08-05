@@ -223,7 +223,9 @@ function AddExModal({ visible, muscle, nextExId, onClose, onSave, C }) {
 
 function EditWorkoutModal({ visible, workout, exercises, onClose, onSave, onAddExercise, C }) {
   const [local, setLocal] = useState(null);
-  useEffect(() => { if (visible && workout) setLocal(JSON.parse(JSON.stringify(workout))); }, [visible, workout]);
+  const [swapEditIdx, setSwapEditIdx] = useState(null);
+  const [showSwapPicker, setShowSwapPicker] = useState(false);
+  useEffect(() => { if (visible && workout) { setLocal(JSON.parse(JSON.stringify(workout))); setSwapEditIdx(null); } }, [visible, workout]);
   if (!visible || !local) return null;
   const styles = makeStyles(C);
   const getEx = (id) => exercises.find(e => e.id === id);
@@ -247,7 +249,15 @@ function EditWorkoutModal({ visible, workout, exercises, onClose, onSave, onAddE
             return (
               <View key={eIdx} style={[styles.logExCard,{marginBottom:10,borderLeftColor:MUSCLE_COLORS[info?.muscle]||C.accent}]}>
                 <View style={styles.rowBetween}>
-                  <View style={{flexDirection:'row',alignItems:'center',flex:1}}>
+                  <View style={{width:28,alignItems:'center',gap:2}}>
+                    <TouchableOpacity onPress={()=>upd(u=>{if(eIdx===0)return;const tmp=u.exercises[eIdx];u.exercises[eIdx]=u.exercises[eIdx-1];u.exercises[eIdx-1]=tmp;})} disabled={eIdx===0} style={{opacity:eIdx===0?0.2:1,padding:2}}>
+                      <Text style={{fontSize:16,color:C.accent}}>▲</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>upd(u=>{if(eIdx>=u.exercises.length-1)return;const tmp=u.exercises[eIdx];u.exercises[eIdx]=u.exercises[eIdx+1];u.exercises[eIdx+1]=tmp;})} disabled={eIdx>=local.exercises.length-1} style={{opacity:eIdx>=local.exercises.length-1?0.2:1,padding:2}}>
+                      <Text style={{fontSize:16,color:C.accent}}>▼</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={{flexDirection:'row',alignItems:'center',flex:1,marginLeft:6}}>
                     <View style={{width:40,height:40,borderRadius:8,backgroundColor:C.bg,alignItems:'center',justifyContent:'center',marginRight:10,overflow:'hidden'}}>
                       {info?.image&&EXERCISE_IMAGES[info.image]?<Image source={EXERCISE_IMAGES[info.image]} style={{width:40,height:40}} resizeMode="cover"/>:<Text style={{fontSize:20}}>{info?.isBodyweight?'🏃':'🏋️'}</Text>}
                     </View>
@@ -256,6 +266,9 @@ function EditWorkoutModal({ visible, workout, exercises, onClose, onSave, onAddE
                       <Text style={[styles.cardSub,{fontSize:12}]}>{info?.muscle} · {info?.equipment}</Text>
                     </View>
                   </View>
+                  <TouchableOpacity onPress={()=>setSwapEditIdx(swapEditIdx===eIdx?null:eIdx)} style={{padding:6,marginRight:4}}>
+                    <Text style={{color:swapEditIdx===eIdx?C.accent:C.textMuted,fontSize:16}}>🔁</Text>
+                  </TouchableOpacity>
                   <TouchableOpacity onPress={()=>upd(u=>u.exercises.splice(eIdx,1))}><Text style={{color:C.danger}}>X</Text></TouchableOpacity>
                 </View>
                 <View style={[styles.row,{marginBottom:4,marginTop:8}]}>
@@ -310,6 +323,32 @@ function EditWorkoutModal({ visible, workout, exercises, onClose, onSave, onAddE
           <TouchableOpacity style={[styles.addExBtn,{marginTop:8,marginBottom:4}]} onPress={onAddExercise}>
             <Text style={styles.addExBtnText}>+ Add exercise</Text>
           </TouchableOpacity>
+          {swapEditIdx!==null&&(
+            <View style={[styles.card,{marginBottom:8,borderColor:C.accent,borderWidth:1}]}>
+              <Text style={[styles.cardSub,{color:C.accent,marginBottom:8}]}>Select exercise to swap with "{getEx(local.exercises[swapEditIdx]?.exId)?.name||'Unknown'}"</Text>
+              <TextInput style={[styles.searchInput,{marginBottom:8}]} placeholder="Search exercises..." placeholderTextColor={C.textMuted}
+                onChangeText={t=>{}}/>
+              <ScrollView style={{maxHeight:200}}>
+                {exercises.filter(e=>e.id!==local.exercises[swapEditIdx]?.exId).map(e=>(
+                  <TouchableOpacity key={e.id} style={[styles.exRow,{paddingVertical:8}]} onPress={()=>{
+                    const u=JSON.parse(JSON.stringify(local));
+                    u.exercises[swapEditIdx].exId=e.id;
+                    setLocal(u);
+                    setSwapEditIdx(null);
+                  }}>
+                    <View style={{width:36,height:36,borderRadius:8,backgroundColor:C.bg,alignItems:'center',justifyContent:'center',marginRight:10,overflow:'hidden'}}>
+                      {e.image&&EXERCISE_IMAGES[e.image]?<Image source={EXERCISE_IMAGES[e.image]} style={{width:36,height:36}} resizeMode="cover"/>:<Text style={{fontSize:18}}>{e.isBodyweight?'🏃':'🏋️'}</Text>}
+                    </View>
+                    <View style={{flex:1}}>
+                      <Text style={[styles.cardTitle,{fontSize:13}]} numberOfLines={1}>{e.name}</Text>
+                      <Text style={[styles.cardSub,{fontSize:11}]}>{e.muscle} · {e.equipment}</Text>
+                    </View>
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
+              <TouchableOpacity onPress={()=>setSwapEditIdx(null)} style={{marginTop:8}}><Text style={{color:C.danger,textAlign:'center'}}>Cancel</Text></TouchableOpacity>
+            </View>
+          )}
           <TouchableOpacity style={[styles.primaryBtn,{alignItems:'center',marginTop:8,marginBottom:8}]} onPress={()=>onSave(local)}>
             <Text style={styles.primaryBtnText}>Save changes</Text>
           </TouchableOpacity>
