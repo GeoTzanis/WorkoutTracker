@@ -830,6 +830,58 @@ function FavBuilderPageV2({ exercises, editingFav, onBack, onSave, C }) {
   );
 }
 
+function WorkoutDetailView({ workoutId, workouts, getEx, unit, fmtDay, fmtDate, totalSets, totalVol, EXERCISE_IMAGES, C, styles, onClose, onEdit }) {
+  if(!workoutId) return null;
+  const w = workouts.find(x=>x.id==workoutId);
+  if(!w) return null;
+  return (
+    <View style={{position:'absolute',top:0,left:0,right:0,bottom:0,backgroundColor:C.bg,zIndex:999}}>
+      <View style={[styles.rowBetween,{paddingHorizontal:16,paddingTop:56,paddingBottom:8}]}>
+        <TouchableOpacity onPress={onClose} style={styles.backBtn}><Text style={styles.backBtnText}>← Back</Text></TouchableOpacity>
+        <View style={{flex:1,marginLeft:8}}>
+          <Text style={[styles.pageTitle,{margin:0,fontSize:18}]} numberOfLines={1}>{w.name}</Text>
+          <Text style={[styles.cardSub,{color:C.accent}]}>{fmtDay(w.date)} · {fmtDate(w.date)}</Text>
+        </View>
+        <TouchableOpacity style={styles.ghostBtn} onPress={()=>onEdit(w)}>
+          <Text style={{color:C.accent,fontSize:13}}>✏️ Edit</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={[styles.statRow,{marginHorizontal:16,marginBottom:12}]}>
+        <View style={styles.statCard}><Text style={styles.statVal}>{w.exercises.length}</Text><Text style={styles.statLabel}>Exercises</Text></View>
+        <View style={styles.statCard}><Text style={styles.statVal}>{totalSets(w)}</Text><Text style={styles.statLabel}>Sets</Text></View>
+        <View style={styles.statCard}><Text style={styles.statVal}>{totalVol(w).toLocaleString()}</Text><Text style={styles.statLabel}>{unit}</Text></View>
+        <View style={styles.statCard}><Text style={styles.statVal}>{w.duration}</Text><Text style={styles.statLabel}>Min</Text></View>
+      </View>
+      <ScrollView style={{flex:1}} contentContainerStyle={{paddingHorizontal:16,paddingBottom:100}}>
+        {(w.exercises||[]).map((ex,i)=>{
+          const info=getEx(ex.exId);
+          const allSets=ex.sets||[];
+          if(allSets.length===0) return null;
+          return (
+            <View key={i} style={[styles.card,{marginBottom:12}]}>
+              <View style={{flexDirection:'row',alignItems:'center',marginBottom:8}}>
+                <View style={{width:44,height:44,borderRadius:8,backgroundColor:C.bg,alignItems:'center',justifyContent:'center',marginRight:10,overflow:'hidden'}}>
+                  {info?.image&&EXERCISE_IMAGES[info.image]?<Image source={EXERCISE_IMAGES[info.image]} style={{width:44,height:44}} resizeMode="cover"/>:<Text style={{fontSize:22}}>{info?.isBodyweight?'🏃':'🏋️'}</Text>}
+                </View>
+                <View style={{flex:1}}>
+                  <Text style={[styles.cardTitle,{fontSize:15}]}>{info?.name||`Exercise ${ex.exId}`}</Text>
+                  <Text style={[styles.cardSub,{fontSize:12}]}>{info?.muscle||''}{info?.equipment?' · '+info.equipment:''}</Text>
+                </View>
+              </View>
+              {allSets.map((set,si)=>(
+                <View key={si} style={{flexDirection:'row',paddingVertical:4,borderBottomWidth:0.5,borderBottomColor:C.border}}>
+                  <Text style={[styles.cardSub,{width:30}]}>{si+1}</Text>
+                  <Text style={[styles.cardSub,{flex:1}]}>{set.unilateral?`L: ${set.weightL}${unit} x ${set.repsL}  R: ${set.weightR}${unit} x ${set.repsR}`:set.partialsOnly?`${set.weight}${unit} x ${set.partialReps} partials`:`${set.weight}${unit} x ${set.reps} reps`}</Text>
+                </View>
+              ))}
+            </View>
+          );
+        })}
+      </ScrollView>
+    </View>
+  );
+}
+
 export default function App() {
   const [page, setPage] = useState('dashboard');
   const [progressTab, setProgressTab] = useState('exercise'); // 'exercise' | 'weekly' | 'measurements'
@@ -963,6 +1015,7 @@ export default function App() {
       }
       if (page === 'settings') { setPage('dashboard'); return true; }
       if (page === 'favbuilder') { setPage('favorites'); setEditingFav(null); return true; }
+      if (workoutDetailId) { setWorkoutDetailId(null); return true; }
       if (page === 'summary') { setFinishedWorkoutSummary(null); setPage('dashboard'); return true; }
       if (page !== 'dashboard') { setPage('dashboard'); return true; }
       if (openMuscle) { setOpenMuscle(null); return true; }
@@ -1232,14 +1285,14 @@ export default function App() {
   })();
   const maxWeeklyVol = Math.max(...weeklyVolumeData.map(d=>d.vol),1);
 
-  const recent = [...workouts].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);
+  const recent = [...workouts].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,10);
   const recentExIds = [...new Set(
     [...workouts].sort((a,b)=>b.date.localeCompare(a.date))
       .flatMap(w=>w.exercises.map(e=>e.exId))
   )].slice(0,10);
 
   const renderDashboard = () => (
-    <ScrollView style={styles.page}>
+    <ScrollView style={styles.page} contentContainerStyle={{paddingBottom:200}}>
       <View style={styles.rowBetween}>
         <Text style={styles.pageTitle}>Dashboard</Text>
         <TouchableOpacity onPress={()=>setPage('settings')} style={{padding:8}}>
@@ -1282,7 +1335,7 @@ export default function App() {
           </TouchableOpacity>
         ))
       }
-      <View style={{height:100}}/>
+      <View style={{height:150}}/>
     </ScrollView>
   );
 
@@ -1384,22 +1437,6 @@ export default function App() {
             <TouchableOpacity style={[styles.ghostBtn,{marginLeft:8,borderColor:C.danger}]} onPress={()=>setShowDiscardConfirm(true)}><Text style={[styles.ghostBtnText,{color:C.danger}]}>✕</Text></TouchableOpacity>
           </View>
         </View>
-        {workouts.length>0&&(
-          <View style={{marginBottom:8}}>
-            <Text style={[styles.cardSub,{marginBottom:6,color:C.textMuted}]}>Recent workouts</Text>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {[...workouts].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,10).map(w=>(
-                <TouchableOpacity key={w.id} onPress={()=>setWorkoutDetailId(w.id)}
-                  style={{backgroundColor:C.card,borderRadius:10,padding:10,marginRight:8,minWidth:140,borderWidth:0.5,borderColor:C.border}}>
-                  <Text style={[styles.cardTitle,{fontSize:13}]} numberOfLines={1}>{w.name}</Text>
-                  <Text style={[styles.cardSub,{fontSize:11,color:C.accent}]}>{fmtDay(w.date)}</Text>
-                  <Text style={[styles.cardSub,{fontSize:11}]}>{fmtDate(w.date)}</Text>
-                  <Text style={[styles.cardSub,{fontSize:11}]}>{totalSets(w)} sets · {totalVol(w).toLocaleString()} {unit}</Text>
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-          </View>
-        )}
         {activeWorkout.exercises.map((ex,eIdx)=>{
           const info=getEx(ex.exId); const color=MUSCLE_COLORS[info?.muscle]||C.accent;
           const lastSets=getLastSession(ex.exId); const isCollapsed=!!collapsedEx[eIdx];
@@ -1726,6 +1763,8 @@ export default function App() {
 
       {progressTab==='calendar'&&(()=>{
         const workoutDates = new Set(workouts.map(w=>w.date));
+        const workoutByDate = {};
+        workouts.forEach(w=>{ if(!workoutByDate[w.date]) workoutByDate[w.date]=w.id; });
         const today = new Date();
         // Get all months from first workout to today
         const allMonths = [];
@@ -1789,13 +1828,15 @@ export default function App() {
                   const hasWorkout=workoutDates.has(dateStr);
                   const isToday=day===today.getDate()&&month===today.getMonth()&&year===today.getFullYear();
                   return (
-                    <View key={i} style={{width:'14.28%',aspectRatio:1,alignItems:'center',justifyContent:'center'}}>
+                    <TouchableOpacity key={i} style={{width:'14.28%',aspectRatio:1,alignItems:'center',justifyContent:'center'}}
+                      onPress={()=>hasWorkout&&setWorkoutDetailId(workoutByDate[dateStr])}
+                      activeOpacity={hasWorkout?0.7:1}>
                       <View style={{width:32,height:32,borderRadius:16,alignItems:'center',justifyContent:'center',
                         backgroundColor:hasWorkout?C.accent:isToday?C.card:'transparent',
                         borderWidth:isToday&&!hasWorkout?1:0,borderColor:C.accent}}>
                         <Text style={{fontSize:12,color:hasWorkout?C.white:isToday?C.accent:C.textMuted,fontWeight:hasWorkout||isToday?'700':'400'}}>{day}</Text>
                       </View>
-                    </View>
+                    </TouchableOpacity>
                   );
                 })}
               </View>
@@ -1927,60 +1968,7 @@ export default function App() {
       <MachinePickerModal visible={showMachinePicker} machines={machines} newMachineName={newMachineName} onChangeNewMachineName={setNewMachineName} onAddMachine={addMachine} onDeleteMachine={deleteMachine} onSelectMachine={(machineId)=>assignMachine(machinePickerEIdx,machineId)} onClose={()=>{setShowMachinePicker(false);setMachinePickerEIdx(null);}} C={C}/>
       <NotesModal visible={showNotesModal} draft={notesDraft} onChangeDraft={setNotesDraft} onSave={saveNotes} onClose={()=>{setShowNotesModal(false);setNotesEIdx(null);}} C={C}/>
       <ConfirmModal visible={showDiscardConfirm} title="Discard workout?" message="This will permanently delete everything logged in this session." confirmLabel="Discard" onConfirm={()=>{setActiveWorkout(null);setTimerRunning(false);setTimerSecs(0);setShowDiscardConfirm(false);}} onCancel={()=>setShowDiscardConfirm(false)} C={C}/>
-      {workoutDetailId&&(()=>{
-        const w=workouts.find(x=>x.id===workoutDetailId);
-        if(!w) return null;
-        return (
-          <Modal visible={true} transparent animationType="slide" onRequestClose={()=>setWorkoutDetailId(null)}>
-            <View style={{flex:1,backgroundColor:'rgba(0,0,0,0.6)',justifyContent:'flex-end'}}>
-              <View style={[styles.modal,{maxHeight:'92%'}]}>
-                <View style={styles.rowBetween}>
-                  <View style={{flex:1}}>
-                    <Text style={styles.sectionTitle}>{w.name}</Text>
-                    <Text style={[styles.cardSub,{color:C.accent}]}>{fmtDay(w.date)} · {fmtDate(w.date)}</Text>
-                  </View>
-                  <TouchableOpacity onPress={()=>setWorkoutDetailId(null)}><Text style={{fontSize:20,color:C.text}}>X</Text></TouchableOpacity>
-                </View>
-                <View style={[styles.statRow,{marginVertical:12}]}>
-                  <View style={styles.statCard}><Text style={styles.statVal}>{w.exercises.length}</Text><Text style={styles.statLabel}>Exercises</Text></View>
-                  <View style={styles.statCard}><Text style={styles.statVal}>{totalSets(w)}</Text><Text style={styles.statLabel}>Sets</Text></View>
-                  <View style={styles.statCard}><Text style={styles.statVal}>{totalVol(w).toLocaleString()}</Text><Text style={styles.statLabel}>{unit}</Text></View>
-                  <View style={styles.statCard}><Text style={styles.statVal}>{w.duration}</Text><Text style={styles.statLabel}>Min</Text></View>
-                </View>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                  {w.exercises.map((ex,i)=>{
-                    const info=getEx(ex.exId);
-                    const completed=ex.sets.filter(s=>s.completed&&!s.warmup);
-                    if(completed.length===0) return null;
-                    return (
-                      <View key={i} style={{marginBottom:16}}>
-                        <View style={{flexDirection:'row',alignItems:'center',marginBottom:8}}>
-                          <View style={{width:44,height:44,borderRadius:8,backgroundColor:C.bg,alignItems:'center',justifyContent:'center',marginRight:10,overflow:'hidden'}}>
-                            {info?.image&&EXERCISE_IMAGES[info.image]?<Image source={EXERCISE_IMAGES[info.image]} style={{width:44,height:44}} resizeMode="cover"/>:<Text style={{fontSize:22}}>{info?.isBodyweight?'\u{1F3C3}':'\u{1F3CB}\uFE0F'}</Text>}
-                          </View>
-                          <View style={{flex:1}}>
-                            <Text style={[styles.cardTitle,{fontSize:15}]}>{info?.name||'Unknown'}</Text>
-                            <Text style={[styles.cardSub,{fontSize:12}]}>{info?.muscle} · {info?.equipment}</Text>
-                          </View>
-                        </View>
-                        {completed.map((set,si)=>(
-                          <View key={si} style={{flexDirection:'row',paddingVertical:4,borderBottomWidth:0.5,borderBottomColor:C.border}}>
-                            <Text style={[styles.cardSub,{width:30}]}>{si+1}</Text>
-                            <Text style={[styles.cardSub,{flex:1}]}>{set.unilateral?`L: ${set.weightL}${unit} x ${set.repsL}  R: ${set.weightR}${unit} x ${set.repsR}`:set.partialsOnly?`${set.weight}${unit} x ${set.partialReps} partials`:`${set.weight}${unit} x ${set.reps} reps`}</Text>
-                          </View>
-                        ))}
-                      </View>
-                    );
-                  })}
-                </ScrollView>
-                <TouchableOpacity style={[styles.ghostBtn,{alignItems:'center',marginTop:12}]} onPress={()=>{setWorkoutDetailId(null);setEditingWorkout(w);setShowEditModal(true);}}>
-                  <Text style={{color:C.accent}}>Edit workout</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal>
-        );
-      })()}
+      {workoutDetailId&&<WorkoutDetailView workoutId={workoutDetailId} workouts={workouts} getEx={getEx} unit={unit} fmtDay={fmtDay} fmtDate={fmtDate} totalSets={totalSets} totalVol={totalVol} EXERCISE_IMAGES={EXERCISE_IMAGES} C={C} styles={styles} onClose={()=>setWorkoutDetailId(null)} onEdit={(w)=>{setWorkoutDetailId(null);setEditingWorkout(w);setShowEditModal(true);}}/>}
       <Modal visible={showFinishModal&&!!activeWorkout} transparent animationType="slide" onRequestClose={()=>{setShowFinishModal(false);setTimerRunning(true);}}>
         <KeyboardAvoidingView behavior={Platform.OS==='ios'?'padding':'height'} style={{flex:1,justifyContent:'flex-end',backgroundColor:'rgba(0,0,0,0.6)'}}>
           <View style={[styles.modal,{maxHeight:'90%',marginBottom:60}]}>
@@ -2152,7 +2140,7 @@ export default function App() {
           <Text style={{color:'rgba(255,255,255,0.4)',marginTop:16,fontSize:13}}>Tap anywhere to close</Text>
         </TouchableOpacity>
       </Modal>
-      {!anyModalOpen&&page!=='settings'&&page!=='favbuilder'&&(
+      {!anyModalOpen&&page!=='settings'&&page!=='favbuilder'&&!workoutDetailId&&(
         <View style={styles.navbar}>
           {[
             {id:'dashboard', icon:'home', label:'Home'},

@@ -20,7 +20,7 @@
     "name": "Cable Kneeling Crunch",
     "muscle": "Abs",
     "equipment": "Cable",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Cable_Kneeling_Crunch"
   },
   {
@@ -36,7 +36,7 @@
     "name": "Cable Standing Crunch",
     "muscle": "Abs",
     "equipment": "Cable",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Cable_Standing_Crunch"
   },
   {
@@ -52,7 +52,7 @@
     "name": "Captains Chair Straight Leg Raise",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Captains_Chair_Straight_Leg_Raise"
   },
   {
@@ -60,7 +60,7 @@
     "name": "Crunch Floor",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Crunch_Floor"
   },
   {
@@ -68,7 +68,7 @@
     "name": "Decline Crunch",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Decline_Crunch"
   },
   {
@@ -76,7 +76,7 @@
     "name": "Dragon Flag",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Dragon_Flag"
   },
   {
@@ -108,7 +108,7 @@
     "name": "Front Plank",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Front_Plank"
   },
   {
@@ -156,7 +156,7 @@
     "name": "Lever Abdominal Crunch Machine",
     "muscle": "Abs",
     "equipment": "Machine",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Lever_Abdominal_Crunch_Machine"
   },
   {
@@ -164,7 +164,7 @@
     "name": "Lever Seated Crunch",
     "muscle": "Abs",
     "equipment": "Machine",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Lever_Seated_Crunch"
   },
   {
@@ -172,7 +172,7 @@
     "name": "Lever Seated Full Crunch",
     "muscle": "Abs",
     "equipment": "Machine",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Lever_Seated_Full_Crunch"
   },
   {
@@ -188,7 +188,7 @@
     "name": "Lying Leg Raises",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Lying_Leg_Raises"
   },
   {
@@ -196,7 +196,7 @@
     "name": "Reverse Crunch",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Reverse_Crunch"
   },
   {
@@ -212,7 +212,7 @@
     "name": "Seated Crunch Machine",
     "muscle": "Abs",
     "equipment": "Machine",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Seated_Crunch_Machine"
   },
   {
@@ -220,7 +220,7 @@
     "name": "Seated Leg Raise",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Seated_Leg_Raise"
   },
   {
@@ -228,7 +228,7 @@
     "name": "Side Plank",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Side_Plank"
   },
   {
@@ -236,7 +236,7 @@
     "name": "Sit Ups",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Sit_Ups"
   },
   {
@@ -244,7 +244,7 @@
     "name": "Weighted Crunch",
     "muscle": "Abs",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Abs/Weighted_Crunch"
   },
   {
@@ -268,7 +268,7 @@
     "name": "Assisted Pull Up",
     "muscle": "Back",
     "equipment": "Machine",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Back/Assisted_Pull_Up"
   },
   {
@@ -284,7 +284,7 @@
     "name": "Band Assisted Pull Up",
     "muscle": "Back",
     "equipment": "Machine",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Back/Band_Assisted_Pull_Up"
   },
   {
@@ -292,7 +292,7 @@
     "name": "Band Assisted Reverse Pull Up",
     "muscle": "Back",
     "equipment": "Machine",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Back/Band_Assisted_Reverse_Pull_Up"
   },
   {
@@ -516,14 +516,14 @@
     "name": "Hyperextension",
     "muscle": "Back",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Back/Hyperextension"
   },
   {
     "id": 66,
     "name": "Incline Row",
     "muscle": "Back",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Back/Incline_Row"
   },
@@ -532,7 +532,7 @@
     "name": "Inverted Row",
     "muscle": "Back",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Back/Inverted_Row"
   },
   {
@@ -684,7 +684,7 @@
     "name": "Pull up",
     "muscle": "Back",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Back/Pull_up"
   },
   {
@@ -859,7 +859,7 @@
     "id": 108,
     "name": "Alternate Bicep Curls",
     "muscle": "Biceps",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Biceps/Alternate_Bicep_Curls"
   },
@@ -899,7 +899,7 @@
     "id": 113,
     "name": "Arm Blaster Bicep Curl",
     "muscle": "Biceps",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Biceps/Arm_Blaster_Bicep_Curl"
   },
@@ -931,7 +931,7 @@
     "id": 117,
     "name": "Bicep Curls",
     "muscle": "Biceps",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Biceps/Bicep_Curls"
   },
@@ -939,7 +939,7 @@
     "id": 118,
     "name": "Cable Bicep Curls",
     "muscle": "Biceps",
-    "equipment": "Cable",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Biceps/Cable_Bicep_Curls"
   },
@@ -1075,7 +1075,7 @@
     "id": 135,
     "name": "Cross Body Hammer Curls",
     "muscle": "Biceps",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Biceps/Cross_Body_Hammer_Curls"
   },
@@ -1179,7 +1179,7 @@
     "id": 148,
     "name": "Ez Bar Drag Bicep Curl",
     "muscle": "Biceps",
-    "equipment": "Barbell",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Biceps/Ez_Bar_Drag_Bicep_Curl"
   },
@@ -1227,7 +1227,7 @@
     "id": 154,
     "name": "Hammer Curls",
     "muscle": "Biceps",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Biceps/Hammer_Curls"
   },
@@ -1259,7 +1259,7 @@
     "id": 158,
     "name": "Lever Bicep Curl",
     "muscle": "Biceps",
-    "equipment": "Machine",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Biceps/Lever_Bicep_Curl"
   },
@@ -1363,7 +1363,7 @@
     "id": 171,
     "name": "Single Arm Dumbbell Hammer Curl",
     "muscle": "Biceps",
-    "equipment": "Single Dumbbell",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Biceps/Single_Arm_Dumbell_Hammer_Curl"
   },
@@ -1371,7 +1371,7 @@
     "id": 172,
     "name": "Single Arm Dumbbell Preacher Curl",
     "muscle": "Biceps",
-    "equipment": "Single Dumbbell",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Biceps/Single_Arm_Dumbell_Preacher_Curl"
   },
@@ -1379,7 +1379,7 @@
     "id": 173,
     "name": "Single Arm Dumbbell Zottman Preacher Curl",
     "muscle": "Biceps",
-    "equipment": "Single Dumbbell",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Biceps/Single_Arm_Dumbell_Zottman_Preacher_Curl"
   },
@@ -1412,7 +1412,7 @@
     "name": "Bodyweight Standing Calf Raise",
     "muscle": "Calves",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Calves/Bodyweight_Stnading_Calf_Raise"
   },
   {
@@ -1716,7 +1716,7 @@
     "name": "Chest Dips",
     "muscle": "Chest",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Chest/Chest_Dips"
   },
   {
@@ -1780,7 +1780,7 @@
     "name": "Dip Hold Isometric",
     "muscle": "Chest",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Chest/Dip_Hold_Isometric"
   },
   {
@@ -1907,7 +1907,7 @@
     "id": 239,
     "name": "Incline Hammer Press",
     "muscle": "Chest",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Chest/Incline_Hanner_Press"
   },
@@ -1987,7 +1987,7 @@
     "id": 249,
     "name": "Lying Hammer Press",
     "muscle": "Chest",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Chest/Lying_Hammer_Press"
   },
@@ -2060,7 +2060,7 @@
     "name": "Push Ups",
     "muscle": "Chest",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Chest/Push_Ups"
   },
   {
@@ -2164,7 +2164,7 @@
     "name": "Weighted Dips",
     "muscle": "Chest",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Chest/Weighted_Dips"
   },
   {
@@ -2187,7 +2187,7 @@
     "id": 274,
     "name": "Arm Blaster Hammer Curls",
     "muscle": "Forearms",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Arm_Blaster_Hammer_Curls"
   },
@@ -2203,7 +2203,7 @@
     "id": 276,
     "name": "Barbell Over Bench Wrist Curl",
     "muscle": "Forearms",
-    "equipment": "Barbell",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Barbell_Over_Bench_Wrist_Curl"
   },
@@ -2243,7 +2243,7 @@
     "id": 281,
     "name": "Cable Hammer Curl",
     "muscle": "Forearms",
-    "equipment": "Cable",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Cable_Hammer_Curl"
   },
@@ -2307,7 +2307,7 @@
     "id": 289,
     "name": "Cross Body Hammer Curl",
     "muscle": "Forearms",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Cross_Body_Hammer_Curl"
   },
@@ -2379,7 +2379,7 @@
     "id": 298,
     "name": "Finger Curls",
     "muscle": "Forearms",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Finger_Curls"
   },
@@ -2395,7 +2395,7 @@
     "id": 300,
     "name": "Over Bench Neutral Wrist Curl",
     "muscle": "Forearms",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Over_Bench_Neutral_Wrist_Curl"
   },
@@ -2403,7 +2403,7 @@
     "id": 301,
     "name": "Over Bench Reverse Wrist Curl",
     "muscle": "Forearms",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Over_Bench_Reverse_Wrist_Curl"
   },
@@ -2411,7 +2411,7 @@
     "id": 302,
     "name": "Over Bench Wrist Curl",
     "muscle": "Forearms",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Over_Bench_Wrist_Curl"
   },
@@ -2451,7 +2451,7 @@
     "id": 307,
     "name": "Reverse Curls",
     "muscle": "Forearms",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Reverse_Curls"
   },
@@ -2483,7 +2483,7 @@
     "id": 311,
     "name": "Seated Neutral Wrist",
     "muscle": "Forearms",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Seated_Neutral_Wrist"
   },
@@ -2499,7 +2499,7 @@
     "id": 313,
     "name": "Single Arm Dumbbell Wrist Curl",
     "muscle": "Forearms",
-    "equipment": "Single Dumbbell",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Single_Arm_Dumbell_Wrist_Curl"
   },
@@ -2507,7 +2507,7 @@
     "id": 314,
     "name": "Single Arm Over Bench Neutral Wrist Curl",
     "muscle": "Forearms",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Single_Arm_Over_Bench_Neutral_Wrist_Curl"
   },
@@ -2587,7 +2587,7 @@
     "id": 324,
     "name": "Weighted Seated Supination",
     "muscle": "Forearms",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Forearms/Weighted_Seated_Supination"
   },
@@ -2812,7 +2812,7 @@
     "name": "Hyperextension",
     "muscle": "Glutes",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Glutes/Hyperextention"
   },
   {
@@ -2884,7 +2884,7 @@
     "name": "Lever Reverse Hyperextension",
     "muscle": "Glutes",
     "equipment": "Machine",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Glutes/Lever_Reverse_Hyperextension"
   },
   {
@@ -3092,7 +3092,7 @@
     "name": "Hyperextension",
     "muscle": "Glutes",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Glutes/_Hyperextention"
   },
   {
@@ -3100,7 +3100,7 @@
     "name": "Assisted Nordic Hamstring Curl",
     "muscle": "Hamstrings",
     "equipment": "Machine",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Hamstrings/Assisted_Nordic_Hamstring_Curl"
   },
   {
@@ -3140,7 +3140,7 @@
     "name": "Glute Ham Raise",
     "muscle": "Hamstrings",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Hamstrings/Glute_Ham_Raise"
   },
   {
@@ -3172,7 +3172,7 @@
     "name": "Nordic Hamstring Curl",
     "muscle": "Hamstrings",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Hamstrings/Nordic_Hamstring_Curl"
   },
   {
@@ -3324,7 +3324,7 @@
     "name": "Bodyweight Kneeling Sissy Squat",
     "muscle": "Quads",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Quads/Bodyweight_Kneeling_Sissy_Squat"
   },
   {
@@ -3332,7 +3332,7 @@
     "name": "Bodyweight Squat",
     "muscle": "Quads",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Quads/Bodyweight_Squat"
   },
   {
@@ -3340,7 +3340,7 @@
     "name": "Bodyweight Wall Squat",
     "muscle": "Quads",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Quads/Bodyweight_Wall_Squat"
   },
   {
@@ -3763,7 +3763,7 @@
     "id": 471,
     "name": "Arnold Press",
     "muscle": "Shoulders",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Shoulders/Arnold_Press"
   },
@@ -3875,7 +3875,7 @@
     "id": 485,
     "name": "Cable Incline Rear Delt Fly Back Support",
     "muscle": "Shoulders",
-    "equipment": "Cable",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Shoulders/Cable_Incline_Rear_Delt_Fly_Back_Support"
   },
@@ -4203,7 +4203,7 @@
     "id": 526,
     "name": "Incline Rear Delt Fly",
     "muscle": "Shoulders",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Shoulders/Incline_Rear_Delt_Fly"
   },
@@ -4315,7 +4315,7 @@
     "id": 540,
     "name": "Seated Bent Arm Lateral Raise",
     "muscle": "Shoulders",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Shoulders/Seated_Bent_Arm_Lateral_Raise"
   },
@@ -4331,7 +4331,7 @@
     "id": 542,
     "name": "Seated Front Raise",
     "muscle": "Shoulders",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Shoulders/Seated_Front_Raise"
   },
@@ -4339,7 +4339,7 @@
     "id": 543,
     "name": "Seated Lateral Raise",
     "muscle": "Shoulders",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Shoulders/Seated_Lateral_Raise"
   },
@@ -4459,7 +4459,7 @@
     "id": 558,
     "name": "Barbell Incline Triceps Extension Skull Crusher",
     "muscle": "Triceps",
-    "equipment": "Barbell",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Triceps/Barbell_Incline_Triceps_Extension_Skull_Crusher"
   },
@@ -4740,7 +4740,7 @@
     "name": "Diamond Push Ups",
     "muscle": "Triceps",
     "equipment": "Bodyweight",
-    "isBodyweight": true,
+    "isBodyweight": false,
     "image": "Triceps/Diamond_Push_Ups"
   },
   {
@@ -4907,7 +4907,7 @@
     "id": 614,
     "name": "Incline Triceps Extension",
     "muscle": "Triceps",
-    "equipment": "Other",
+    "equipment": "Dumbbell",
     "isBodyweight": false,
     "image": "Triceps/Incline_Triceps_Extension"
   },
@@ -5036,7 +5036,7 @@
     "name": "Triceps Dip",
     "muscle": "Triceps",
     "equipment": "Bodyweight",
-    "isBodyweight": false,
+    "isBodyweight": true,
     "image": "Triceps/Triceps_Dip"
   },
   {
