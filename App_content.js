@@ -954,6 +954,8 @@ export default function App() {
   const [showExPicker, setShowExPicker] = useState(false);
   const [showExPickerEdit, setShowExPickerEdit] = useState(false);
   const [progressExId, setProgressExId] = useState(null);
+  const [progressSearch, setProgressSearch] = useState('');
+  const [progressMuscle, setProgressMuscle] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingWorkout, setEditingWorkout] = useState(null);
   const [showWorkoutMenu, setShowWorkoutMenu] = useState(null);
@@ -1713,7 +1715,7 @@ export default function App() {
   };
 
   const renderProgress = () => (
-    <ScrollView style={styles.page}>
+    <ScrollView style={styles.page} contentContainerStyle={{paddingBottom:150}}>
       <Text style={styles.pageTitle}>Progress</Text>
       <View style={[styles.row,{marginBottom:14,gap:8}]}>
         {[['exercise','Exercise'],['weekly','Weekly Vol'],['calendar','Calendar'],['measurements','Body']].map(([id,label])=>(
@@ -1725,16 +1727,77 @@ export default function App() {
 
       {progressTab==='exercise'&&<>
         {exercises.length===0?<View style={styles.emptyState}><Text style={styles.emptyIcon}>📈</Text><Text style={styles.emptyText}>Add exercises to your library first.</Text></View>:<>
-          <View style={styles.card}>
-            <Text style={[styles.cardSub,{marginBottom:8}]}>Select exercise</Text>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {exercises.filter(e=>workouts.some(w=>w.exercises.some(ex=>ex.exId===e.id))).map(e=>(
-                <TouchableOpacity key={e.id} style={[styles.filterTag,progressExId===e.id&&styles.filterTagActive,{marginRight:6}]} onPress={()=>{setProgressExId(e.id);setProgressMachineId(null);}}>
-                  <Text style={[styles.filterTagText,progressExId===e.id&&styles.filterTagTextActive]}>{e.name}</Text>
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-          </View>
+          {!progressExId&&(
+            <>
+              <View style={styles.card}>
+                <TextInput style={styles.searchInput} value={progressSearch} onChangeText={t=>{setProgressSearch(t);setProgressMuscle(null);}} placeholder="Search exercises..." placeholderTextColor={C.textMuted}/>
+              </View>
+              {progressSearch.length>0?(
+                exercises.filter(e=>e.name.toLowerCase().includes(progressSearch.toLowerCase())&&workouts.some(w=>w.exercises.some(ex=>ex.exId===e.id))).map(e=>(
+                  <TouchableOpacity key={e.id} style={styles.card} onPress={()=>{setProgressExId(e.id);setProgressMachineId(null);setProgressSearch('');}}>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                      <View style={{width:40,height:40,borderRadius:8,backgroundColor:C.bg,alignItems:'center',justifyContent:'center',marginRight:10,overflow:'hidden'}}>
+                        {e.image&&EXERCISE_IMAGES[e.image]?<Image source={EXERCISE_IMAGES[e.image]} style={{width:40,height:40}} resizeMode="cover"/>:<Text style={{fontSize:20}}>{e.isBodyweight?'🏃':'🏋️'}</Text>}
+                      </View>
+                      <View style={{flex:1}}>
+                        <Text style={[styles.cardTitle,{fontSize:14}]} numberOfLines={1}>{e.name}</Text>
+                        <Text style={[styles.cardSub,{fontSize:12}]}>{e.muscle} · {e.equipment}</Text>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                ))
+              ):progressMuscle?(
+                <>
+                  <TouchableOpacity onPress={()=>setProgressMuscle(null)} style={[styles.backBtn,{marginBottom:8}]}><Text style={styles.backBtnText}>← {progressMuscle}</Text></TouchableOpacity>
+                  {exercises.filter(e=>e.muscle===progressMuscle&&workouts.some(w=>w.exercises.some(ex=>ex.exId===e.id))).map(e=>(
+                    <TouchableOpacity key={e.id} style={styles.card} onPress={()=>{setProgressExId(e.id);setProgressMachineId(null);setProgressMuscle(null);}}>
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
+                        <View style={{width:40,height:40,borderRadius:8,backgroundColor:C.bg,alignItems:'center',justifyContent:'center',marginRight:10,overflow:'hidden'}}>
+                          {e.image&&EXERCISE_IMAGES[e.image]?<Image source={EXERCISE_IMAGES[e.image]} style={{width:40,height:40}} resizeMode="cover"/>:<Text style={{fontSize:20}}>{e.isBodyweight?'🏃':'🏋️'}</Text>}
+                        </View>
+                        <View style={{flex:1}}>
+                          <Text style={[styles.cardTitle,{fontSize:14}]} numberOfLines={1}>{e.name}</Text>
+                          <Text style={styles.cardSub}>{e.equipment}</Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  ))}
+                </>
+              ):(
+                MUSCLE_GROUPS.filter(m=>exercises.some(e=>e.muscle===m&&workouts.some(w=>w.exercises.some(ex=>ex.exId===e.id)))).map(muscle=>{
+                  const count=exercises.filter(e=>e.muscle===muscle&&workouts.some(w=>w.exercises.some(ex=>ex.exId===e.id))).length;
+                  return (
+                    <TouchableOpacity key={muscle} style={[styles.muscleGroupHeader,{marginBottom:6}]} onPress={()=>setProgressMuscle(muscle)}>
+                      <View style={styles.muscleIconWrapSmall}><Image source={MUSCLE_IMAGES[muscle]} style={{width:50,height:50}} resizeMode="contain"/></View>
+                      <View style={{flex:1}}><Text style={styles.muscleGroupName}>{muscle}</Text><Text style={styles.cardSub}>{count} exercise{count!==1?'s':''}</Text></View>
+                      <Text style={{color:C.textMuted,fontSize:18}}>›</Text>
+                    </TouchableOpacity>
+                  );
+                })
+              )}
+            </>
+          )}
+          {progressExId&&(()=>{
+            const info=getEx(progressExId);
+            return (
+              <View style={[styles.card,{marginBottom:8}]}>
+                <View style={styles.rowBetween}>
+                  <View style={{flexDirection:'row',alignItems:'center',flex:1}}>
+                    <View style={{width:40,height:40,borderRadius:8,backgroundColor:C.bg,alignItems:'center',justifyContent:'center',marginRight:10,overflow:'hidden'}}>
+                      {info?.image&&EXERCISE_IMAGES[info.image]?<Image source={EXERCISE_IMAGES[info.image]} style={{width:40,height:40}} resizeMode="cover"/>:<Text style={{fontSize:20}}>{info?.isBodyweight?'🏃':'🏋️'}</Text>}
+                    </View>
+                    <View style={{flex:1}}>
+                      <Text style={[styles.cardTitle,{fontSize:15}]} numberOfLines={1}>{info?.name||'Unknown'}</Text>
+                      <Text style={styles.cardSub}>{info?.muscle} · {info?.equipment}</Text>
+                    </View>
+                  </View>
+                  <TouchableOpacity onPress={()=>{setProgressExId(null);setProgressMachineId(null);}} style={styles.backBtn}>
+                    <Text style={styles.backBtnText}>← Back</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            );
+          })()}
           {progressExId&&availableMachinesForEx.length>0&&(
             <View style={styles.card}>
               <Text style={[styles.cardSub,{marginBottom:8}]}>Filter by machine</Text>
@@ -1747,14 +1810,41 @@ export default function App() {
             </View>
           )}
           {!progressExId?<Text style={styles.emptyText}>Select an exercise above.</Text>:progressData.length===0?<Text style={styles.emptyText}>Log this exercise to see progress.</Text>:<>
-            {(()=>{const pr=getPR(progressExId);return pr?<View style={[styles.card,styles.rowBetween]}><Text style={styles.cardSub}>Personal Record 🏆</Text><Text style={{color:'#FFD700',fontWeight:'700',fontSize:20}}>{pr} {unit}</Text></View>:null;})()}
+            {(()=>{
+              const allSets=workouts.flatMap(w=>{
+                const ex=w.exercises.find(e=>e.exId===progressExId);
+                return ex?ex.sets.filter(s=>s.completed&&!s.warmup).map(s=>({...s,date:w.date})):[];
+              });
+              if(allSets.length===0) return null;
+              const maxWt=Math.max(...allSets.map(s=>s.unilateral?Math.max(parseDecimal(s.weightL||0),parseDecimal(s.weightR||0)):parseDecimal(s.weight||0)));
+              const best1RM=Math.max(...allSets.map(s=>{
+                const w=s.unilateral?Math.max(parseDecimal(s.weightL||0),parseDecimal(s.weightR||0)):parseDecimal(s.weight||0);
+                const r=s.unilateral?Math.max(parseDecimal(s.repsL||0),parseDecimal(s.repsR||0)):parseDecimal(s.reps||0);
+                return calc1RM(w,r);
+              }));
+              return (
+                <View style={[styles.card,styles.rowBetween,{marginBottom:8}]}>
+                  <View style={{alignItems:'center'}}>
+                    <Text style={styles.cardSub}>Max Weight 🏆</Text>
+                    <Text style={{color:'#FFD700',fontWeight:'700',fontSize:20}}>{maxWt} {unit}</Text>
+                  </View>
+                  <View style={{alignItems:'center'}}>
+                    <Text style={styles.cardSub}>Est. 1RM</Text>
+                    <Text style={{color:'#FFD700',fontWeight:'700',fontSize:20}}>{Math.round(best1RM)} {unit}</Text>
+                  </View>
+                </View>
+              );
+            })()}
             {workouts.filter(w=>w.exercises.some(e=>e.exId===progressExId&&(!progressMachineId||e.machineId===progressMachineId))).sort((a,b)=>b.date.localeCompare(a.date)).map((w,i)=>{
               const ex=w.exercises.find(e=>e.exId===progressExId&&(!progressMachineId||e.machineId===progressMachineId));
               const vol=ex.sets.reduce((s,set)=>s+setVolume(set,ex),0);
               return (
                 <View key={i} style={styles.card}>
                   <View style={[styles.rowBetween,{marginBottom:10}]}>
-                    <Text style={styles.cardTitle}>{fmtDate(w.date)}</Text>
+                    <View>
+                      <Text style={styles.cardTitle}>{fmtDay(w.date)}</Text>
+                      <Text style={styles.cardSub}>{fmtDate(w.date)} · {w.name}</Text>
+                    </View>
                     <Text style={[styles.cardSub,{color:C.accent}]}>{vol} {unit}</Text>
                   </View>
                   <View style={[styles.row,{marginBottom:6}]}>

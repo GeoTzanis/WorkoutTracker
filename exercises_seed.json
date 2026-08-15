@@ -939,7 +939,7 @@
     "id": 118,
     "name": "Cable Bicep Curls",
     "muscle": "Biceps",
-    "equipment": "Dumbbell",
+    "equipment": "Cable",
     "isBodyweight": false,
     "image": "Biceps/Cable_Bicep_Curls"
   },
