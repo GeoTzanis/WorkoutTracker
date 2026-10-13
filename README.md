@@ -12,7 +12,7 @@ A full-featured workout tracking app built with **React Native** and **Expo**, d
 - **Partials, Myo-Reps, Drop Sets** — advanced training techniques supported
 - **Rest timer** — built-in countdown timer between sets
 
-- **PR tracking** — 🏆 highlights when you hit a new personal record
+- **PR tracking** —  highlights when you hit a new personal record
 - **Last session hints** — shows previous weight and reps as a reference
 - Reorder exercises with ▲▼ buttons
 =======
